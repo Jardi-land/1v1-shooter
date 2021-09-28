@@ -16,6 +16,8 @@ bg_surface.fill((118, 120, 134, 255))
 
 platform = pygame.image.load("platforms/Platform.png")
 platform = pygame.transform.scale(platform, (165, 155))
+platform_thin = pygame.image.load("platforms/Platform_Thin.png")
+platform_thin = pygame.transform.scale(platform_thin, (85, 155))
 
 platform_x = 1755
 platform_y = 925
@@ -27,7 +29,7 @@ while True:
             exit()
 
     screen.blit(bg_surface,(0,0))
-    update_map(platform_y, platform_x, platform)
+    update_map(platform_y, platform_x, platform, platform_thin)
 
     pygame.display.update()
     clock.tick(60)
