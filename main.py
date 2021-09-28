@@ -15,9 +15,9 @@ bg_surface = pygame.Surface((1920,1080))
 bg_surface.fill((118, 120, 134, 255))
 
 platform = pygame.image.load("platforms/Platform.png")
-platform = pygame.transform.scale(platform, (160, 155))
+platform = pygame.transform.scale(platform, (165, 155))
 
-platform_x = 1760
+platform_x = 1755
 platform_y = 925
 
 while True:

@@ -33,7 +33,7 @@ def update_map(platform_y, platform_x, platform):
         line_i = 17-i
         for i in range(12):
             if i == 0:
-                platform_x = 1760
+                platform_x = 1755
             else:
                 platform_x = platform_x-160
             if firstmap[line_i][11-i] == "X":
