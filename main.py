@@ -1,5 +1,6 @@
 import sys, pygame
 from map_menu import *
+from player_one import *
 
 pygame.init()
 
