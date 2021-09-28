@@ -26,7 +26,8 @@ while True:
             pygame.quit()
             exit()
 
-    screen.blit(test_surface,(0,0))
+    screen.blit(bg_surface,(0,0))
+    update_map(platform_y, platform_x, platform)
 
     pygame.display.update()
     clock.tick(60)
