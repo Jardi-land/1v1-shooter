@@ -14,9 +14,9 @@ clock = pygame.time.Clock()
 bg_surface = pygame.Surface((1920,1080))
 bg_surface.fill((118, 120, 134, 255))
 
-platform = pygame.image.load("platforms/Platform.png")
+platform = pygame.image.load("game_files/platforms/Platform.png")
 platform = pygame.transform.scale(platform, (165, 155))
-platform_thin = pygame.image.load("platforms/Platform_Thin.png")
+platform_thin = pygame.image.load("game_files/platforms/Platform_Thin.png")
 platform_thin = pygame.transform.scale(platform_thin, (85, 155))
 
 platform_x = 1755
