@@ -1,4 +1,5 @@
 import sys, pygame
+from maps import *
 
 pygame.init()
 
