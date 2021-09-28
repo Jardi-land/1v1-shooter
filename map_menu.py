@@ -28,7 +28,7 @@ firstmap = [["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
 
 screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
 
-def update_map(platform_y, platform_x, platform, platform_thin):
+def update_map_menu(platform_y, platform_x, platform, platform_thin):
     for i in range(18):
         if i == 0:
             platform_y = 925
