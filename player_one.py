@@ -1,3 +1,6 @@
+"""
+Creator: @Lorenzo_De_ZEN
+"""
 import sys, pygame
 
 screen_res = [1920, 1080]
