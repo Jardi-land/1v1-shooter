@@ -3,7 +3,7 @@ Creator: @Lorenzo_De_ZEN
 """
 
 import sys, pygame
-from map_menu import *
+from level import *
 from player_one import *
 from settings import *
 from tiles import Tiles
