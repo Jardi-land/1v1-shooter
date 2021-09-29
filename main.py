@@ -4,7 +4,7 @@ Creator: @Lorenzo_De_ZEN
 
 import sys, pygame
 from level import *
-from player_one import *
+from player import *
 from settings import *
 from tiles import Tiles
 
