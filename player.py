@@ -3,9 +3,10 @@ Creator: @Lorenzo_De_ZEN
 """
 
 import sys, pygame
-from settings import *
 
-screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
-
-player_one_surf = pygame.image.load("game_files/characters/green/idle/Gunner_Idle1.png").convert_alpha()
-player_one_surf = pygame.transform.scale(player_one_surf, (240, 240))
+class Player(pygame.sprite.Sprite):
+    def __init__(self,pos):
+        super().__init__()
+        self.image = pygame.Surface((100,150))
+        self.image.fill("red")
+        self.rect = self.image.get_rect(topleft = pos)
