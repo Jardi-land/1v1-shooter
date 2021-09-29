@@ -12,6 +12,7 @@ class Level:
         self.display_surface = surface
         self.setup_level(level_data)
         self.world_shift = 0
+        self.current_x = 0
 
     def setup_level(self,layout):
         self.Tiles = pygame.sprite.Group()
@@ -51,8 +52,18 @@ class Level:
             if sprite.rect.colliderect(Player.rect):
                 if Player.direction.x < 0:
                     Player.rect.left = sprite.rect.right
+                    Player.on_left = True
+                    self.current_x = Player.rect.left
                 elif Player.direction.x > 0:
                     Player.rect.right = sprite.rect.left
+                    Player.on_right = True
+                    self.current_x = Player.rect.right
+        
+        if Player.on_left and (Player.rect.left < self.current_x or Player.direction.x >= 0):
+            Player.on_left = False
+
+        if Player.on_right and (Player.rect.right > self.current_x or Player.direction.x <= 0):
+            Player.on_right = False
 
     def vertical_movement_collision(self):
         Player = self.Player.sprite
@@ -63,9 +74,16 @@ class Level:
                 if Player.direction.y > 0:
                     Player.rect.bottom = sprite.rect.top
                     Player.direction.y = 0
+                    Player.on_ground = True
                 elif Player.direction.y < 0:
                     Player.rect.top = sprite.rect.bottom
                     Player.direction.y = 0
+                    Player.on_ceiling = True
+        
+        if Player.on_ground and Player.direction.y < 0 or Player.direction.y > 1:
+            Player.on_ground = False
+        if Player.on_ceiling and Player.direction.y > 0:
+            Player.on_ceiling = False
    
     def draw(self):
         #Tiles
