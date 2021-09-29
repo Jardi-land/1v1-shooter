@@ -6,6 +6,7 @@ import sys, pygame
 from map_menu import *
 from player_one import *
 from settings import *
+from tiles import Tiles
 
 pygame.init()
 
@@ -16,13 +17,10 @@ clock = pygame.time.Clock()
 bg_surf = pygame.Surface((1920,1080))
 bg_surf.fill((118, 120, 134, 255))
 
-platform_surf = pygame.image.load("game_files/platforms/Platform.png").convert_alpha()
-platform_surf = pygame.transform.scale(platform_surf, (165, 155))
-platform_thin_surf = pygame.image.load("game_files/platforms/Platform_Thin.png").convert_alpha()
-platform_thin_surf = pygame.transform.scale(platform_thin_surf, (85, 155))
-
 platform_x = 1755
 platform_y = 925
+
+level = Level(firstmap, screen)
 
 while True:
     for event in pygame.event.get():
@@ -31,7 +29,7 @@ while True:
             exit()
 
     screen.blit(bg_surf,(0,0))
-    update_map_menu(platform_y, platform_x, platform_surf, platform_thin_surf)
+    level.draw()
 
     pygame.display.update()
     clock.tick(60)
