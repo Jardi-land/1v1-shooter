@@ -5,12 +5,9 @@ Creator: @Lorenzo_De_ZEN
 import sys, pygame
 from map_menu import *
 from player_one import *
+from settings import *
 
 pygame.init()
-
-screen_res = [1920, 1080]
-screen_scale = [1920/screen_res[0], 1080/screen_res[1]]
-window_name = "1v1 Shooter"
 
 screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
 pygame.display.set_caption(window_name)
