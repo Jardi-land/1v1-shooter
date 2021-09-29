@@ -42,6 +42,31 @@ class Level:
                     elif layout[line_i][11-i] == "P":
                         player_sprite = Player((platform_x,platform_y))
                         self.Player.add(player_sprite)
+
+    def horizontal_movement_collision(self):
+        Player = self.Player.sprite
+        Player.rect.x += Player.direction.x * Player.speed
+
+        for sprite in self.Tiles.sprites():
+            if sprite.rect.colliderect(Player.rect):
+                if Player.direction.x < 0:
+                    Player.rect.left = sprite.rect.right
+                elif Player.direction.x > 0:
+                    Player.rect.right = sprite.rect.left
+
+    def vertical_movement_collision(self):
+        Player = self.Player.sprite
+        Player.apply_gravity()
+
+        for sprite in self.Tiles.sprites():
+            if sprite.rect.colliderect(Player.rect):
+                if Player.direction.y > 0:
+                    Player.rect.bottom = sprite.rect.top
+                    Player.direction.y = 0
+                elif Player.direction.y < 0:
+                    Player.rect.top = sprite.rect.bottom
+                    Player.direction.y = 0
+   
     def draw(self):
         #Tiles
         self.Tiles.update(self.world_shift)
@@ -49,4 +74,6 @@ class Level:
 
         #Player
         self.Player.update()
+        self.horizontal_movement_collision()
+        self.vertical_movement_collision()
         self.Player.draw(self.display_surface)
