@@ -10,6 +10,7 @@ class Level:
     def __init__(self,level_data,surface):
         self.display_surface = surface
         self.setup_level(level_data)
+        self.world_shift = 0
 
     def setup_level(self,layout):
         self.Tiles = pygame.sprite.Group()
@@ -36,5 +37,5 @@ class Level:
                         Tile = Tiles((platform_x,platform_y),0)
                         self.Tiles.add(Tile)
     def draw(self):
-        self.Tiles.update(0)
+        self.Tiles.update(self.world_shift)
         self.Tiles.draw(self.display_surface)
