@@ -28,18 +28,18 @@ class Level:
                         platform_x = 1755
                     else:
                         platform_x = platform_x-160
-                    if firstmap[line_i][11-i] == "X":
+                    if layout[line_i][11-i] == "X":
                         Tile = Tiles((platform_x,platform_y),1)
                         self.Tiles.add(Tile)
-                    elif firstmap[line_i][11-i] == " |":
+                    elif layout[line_i][11-i] == " |":
                         platform_x = platform_x+80
                         Tile = Tiles((platform_x,platform_y),0)
                         self.Tiles.add(Tile)
                         platform_x = platform_x-80
-                    elif firstmap[line_i][11-i] == "| ":
+                    elif layout[line_i][11-i] == "| ":
                         Tile = Tiles((platform_x,platform_y),0)
                         self.Tiles.add(Tile)
-                    elif firstmap[line_i][11-i] == "P":
+                    elif layout[line_i][11-i] == "P":
                         player_sprite = Player((platform_x,platform_y))
                         self.Player.add(player_sprite)
     def draw(self):
@@ -48,4 +48,5 @@ class Level:
         self.Tiles.draw(self.display_surface)
 
         #Player
+        self.Player.update()
         self.Player.draw(self.display_surface)
