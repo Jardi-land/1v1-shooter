@@ -31,10 +31,11 @@ class Player(pygame.sprite.Sprite):
     def import_character_assets(self):
         character_path = "game_files/characters/green/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
-
+        self.animations_scale = {"idle":[140, 165],"run":[140, 180],"jump":[140, 170],"crouch":[240, 240],"death":[240, 240]}
         for animation in self.animations.keys():
             full_path = character_path + animation
-            self.animations[animation] = import_folder(full_path)
+
+            self.animations[animation] = import_folder(full_path, self.animations_scale[animation][0], self.animations_scale[animation][1])
 
     def animate(self):
         animation = self.animations[self.status]
