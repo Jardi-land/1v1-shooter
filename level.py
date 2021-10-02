@@ -49,13 +49,13 @@ class Level:
         Player.rect.x += Player.direction.x * Player.speed
 
         for sprite in self.Tiles.sprites():
-            if sprite.rect.colliderect(Player.rect):
+            if sprite.colliderect.colliderect(Player.rect):
                 if Player.direction.x < 0:
-                    Player.rect.left = sprite.rect.right
+                    Player.rect.left = sprite.colliderect.right
                     Player.on_left = True
                     self.current_x = Player.rect.left
                 elif Player.direction.x > 0:
-                    Player.rect.right = sprite.rect.left
+                    Player.rect.right = sprite.colliderect.left
                     Player.on_right = True
                     self.current_x = Player.rect.right
         
@@ -70,13 +70,13 @@ class Level:
         Player.apply_gravity()
 
         for sprite in self.Tiles.sprites():
-            if sprite.rect.colliderect(Player.rect):
+            if sprite.colliderect.colliderect(Player.rect):
                 if Player.direction.y > 0:
-                    Player.rect.bottom = sprite.rect.top
+                    Player.rect.bottom = sprite.colliderect.top
                     Player.direction.y = 0
                     Player.on_ground = True
                 elif Player.direction.y < 0:
-                    Player.rect.top = sprite.rect.bottom
+                    Player.rect.top = sprite.colliderect.bottom
                     Player.direction.y = 0
                     Player.on_ceiling = True
         
