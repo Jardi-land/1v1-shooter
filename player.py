@@ -19,6 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 8
         self.gravity = 0.8
         self.jump_speed = -17
+        self.double_jump = 2
 
         #Player Status
         self.status = "idle"
@@ -28,6 +29,9 @@ class Player(pygame.sprite.Sprite):
         self.on_left = False
         self.on_right = False
         self.stop_index = False
+
+        #Player input
+        self.single_w = True
 
     def import_character_assets(self):
         character_path = "game_files/characters/green/"
@@ -90,8 +94,15 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
 
-        if keys[pygame.K_w] and self.on_ground:
+        if keys[pygame.K_w] and self.double_jump > 0 and self.single_w:
             self.jump()
+            self.single_w = False
+            self.double_jump = self.double_jump - 2
+        elif not keys[pygame.K_w]:
+            self.single_w = True
+
+        if self.on_ground:
+            self.double_jump = 2
 
     def get_status(self):
         if self.direction.y < 0:
