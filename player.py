@@ -27,6 +27,7 @@ class Player(pygame.sprite.Sprite):
         self.on_ceiling = False
         self.on_left = False
         self.on_right = False
+        self.stop_index = False
 
     def import_character_assets(self):
         character_path = "game_files/characters/green/"
@@ -40,9 +41,19 @@ class Player(pygame.sprite.Sprite):
     def animate(self):
         animation = self.animations[self.status]
 
-        self.frame_index += self.animation_speed
-        if self.frame_index >= len(animation):
-            self.frame_index = 0
+        if self.status == "jump":
+            if self.stop_index == False:
+                self.frame_index += self.animation_speed
+                if self.frame_index >= len(animation):
+                    self.frame_index = 0
+                if int(self.frame_index) == 1:
+                    self.stop_index = True
+        else:
+            self.stop_index = False
+            image = animation[int(self.frame_index)] 
+            self.frame_index += self.animation_speed
+            if self.frame_index >= len(animation):
+                self.frame_index = 0
 
         image = animation[int(self.frame_index)]
         if self.facing_right:
