@@ -54,7 +54,6 @@ class Player(pygame.sprite.Sprite):
                     self.stop_index = True
         else:
             self.stop_index = False
-            image = animation[int(self.frame_index)] 
             self.frame_index += self.animation_speed
             if self.frame_index >= len(animation):
                 self.frame_index = 0
