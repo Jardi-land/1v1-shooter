@@ -3,6 +3,7 @@ Creator: @Lorenzo_De_ZEN
 """
 
 import sys, pygame
+from pygame.constants import K_s
 from support import import_folder
 
 class Player(pygame.sprite.Sprite):
@@ -28,7 +29,9 @@ class Player(pygame.sprite.Sprite):
         self.on_ceiling = False
         self.on_left = False
         self.on_right = False
-        self.stop_index = False
+        self.stop_index_jump = False
+        self.stop_index_crouch = False
+        self.want_crouch = False
 
         #Player input
         self.single_w = True
@@ -36,7 +39,7 @@ class Player(pygame.sprite.Sprite):
     def import_character_assets(self):
         character_path = "game_files/characters/green/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
-        self.animations_scale = {"idle":[140, 165],"run":[140, 180],"jump":[140, 170],"crouch":[240, 240],"death":[240, 240]}
+        self.animations_scale = {"idle":[140, 165],"run":[140, 180],"jump":[140, 170],"crouch":[140, 170],"death":[240, 240]}
         for animation in self.animations.keys():
             full_path = character_path + animation
 
@@ -46,14 +49,24 @@ class Player(pygame.sprite.Sprite):
         animation = self.animations[self.status]
 
         if self.status == "jump":
-            if self.stop_index == False:
+            if self.stop_index_jump == False:
                 self.frame_index += self.animation_speed
                 if self.frame_index >= len(animation):
                     self.frame_index = 0
-                if int(self.frame_index) == 1:
-                    self.stop_index = True
+                if int(self.frame_index) == len(animation) - 1:
+                    self.stop_index_jump = True
+
+        elif self.status == "crouch":
+            if self.stop_index_crouch == False:
+                self.frame_index += self.animation_speed
+                if self.frame_index >= len(animation):
+                    self.frame_index = 0
+                if int(self.frame_index) == len(animation) - 1:
+                    self.stop_index_crouch = True
+
         else:
-            self.stop_index = False
+            self.stop_index_crouch = False
+            self.stop_index_jump = False
             self.frame_index += self.animation_speed
             if self.frame_index >= len(animation):
                 self.frame_index = 0
@@ -93,12 +106,18 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
 
-        if keys[pygame.K_w] and self.double_jump > 0 and self.single_w:
+        if keys[pygame.K_w] and keys[pygame.K_s]:
+            pass
+        elif keys[pygame.K_w] and self.double_jump > 0 and self.single_w:
             self.jump()
             self.single_w = False
             self.double_jump = self.double_jump - 2
         elif not keys[pygame.K_w]:
             self.single_w = True
+            if keys[pygame.K_s] and self.on_ground:
+                self.want_crouch = True
+            else:
+                self.want_crouch = False
 
         if self.on_ground:
             self.double_jump = 2
@@ -111,6 +130,8 @@ class Player(pygame.sprite.Sprite):
         else:
             if self.direction.x != 0 and self.on_ground:
                 self.status = "run"
+            elif self.want_crouch:
+                self.status = "crouch"
             elif self.on_ground:
                 self.status = "idle"
 
