@@ -3,6 +3,7 @@ Creator: @Lorenzo_De_ZEN
 """
 
 import sys, pygame
+from settings import *
 from pygame import mixer
 from support import import_folder
 from mixer_sounds import import_sounds
@@ -20,9 +21,9 @@ class Player(pygame.sprite.Sprite):
 
         #Player Movement
         self.direction = pygame.math.Vector2(0,0)
-        self.speed = 8
-        self.gravity = 0.8
-        self.jump_speed = -17
+        self.speed = 10*screen_scale
+        self.gravity = 0.8*screen_scale
+        self.jump_speed = -15*screen_scale
         self.double_jump = 2
 
         #Player Status
@@ -43,7 +44,7 @@ class Player(pygame.sprite.Sprite):
         character_path = "game_files/characters/green/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
-        self.animations_scale = {"idle":[140, 165],"run":[140, 180],"jump":[140, 170],"crouch":[140, 170],"death":[240, 240]}
+        self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(240*screen_scale), int(240*screen_scale)]}
         self.sounds = {"walk":[]}
 
         for animation in self.animations.keys():

@@ -20,23 +20,23 @@ class Level:
 
         for i in range(18):
                 if i == 0:
-                    platform_y = 925
+                    platform_y = screen_res[1] - (155*screen_scale)
                 else:
-                    platform_y = platform_y-60
+                    platform_y -= (60*screen_scale)
                 line_i = 17-i
                 for i in range(12):
                     if i == 0:
-                        platform_x = 1755
+                        platform_x = screen_res[0] - (165*screen_scale)
                     else:
-                        platform_x = platform_x-160
+                        platform_x -= (160*screen_scale)
                     if layout[line_i][11-i] == "X":
                         Tile = Tiles((platform_x,platform_y),1)
                         self.Tiles.add(Tile)
                     elif layout[line_i][11-i] == " |":
-                        platform_x = platform_x+80
+                        platform_x += (80*screen_scale)
                         Tile = Tiles((platform_x,platform_y),0)
                         self.Tiles.add(Tile)
-                        platform_x = platform_x-80
+                        platform_x -= (80*screen_scale)
                     elif layout[line_i][11-i] == "| ":
                         Tile = Tiles((platform_x,platform_y),0)
                         self.Tiles.add(Tile)
