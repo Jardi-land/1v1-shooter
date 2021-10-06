@@ -3,8 +3,9 @@ Creator: @Lorenzo_De_ZEN
 """
 
 import sys, pygame
-from pygame.constants import K_s
+from pygame import mixer
 from support import import_folder
+from mixer_sounds import import_sounds
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos):
@@ -12,6 +13,8 @@ class Player(pygame.sprite.Sprite):
         self.import_character_assets()
         self.frame_index = 0
         self.animation_speed = 0.15
+        self.step_index = 0
+        self.step_speed = 0.0525
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
 
@@ -38,12 +41,20 @@ class Player(pygame.sprite.Sprite):
 
     def import_character_assets(self):
         character_path = "game_files/characters/green/"
+        sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
         self.animations_scale = {"idle":[140, 165],"run":[140, 180],"jump":[140, 170],"crouch":[140, 170],"death":[240, 240]}
+        self.sounds = {"walk":[]}
+
         for animation in self.animations.keys():
             full_path = character_path + animation
 
             self.animations[animation] = import_folder(full_path, self.animations_scale[animation][0], self.animations_scale[animation][1])
+        
+        for sound in self.sounds.keys():
+            full_path = sound_path + sound
+
+            self.sounds[sound] = import_sounds(full_path)
 
     def animate(self):
         animation = self.animations[self.status]
@@ -92,6 +103,21 @@ class Player(pygame.sprite.Sprite):
         elif self.on_ceiling:
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
 
+    def foot_step(self):
+        step = self.sounds["walk"]
+
+        self.last_step = int(self.step_index)
+
+        self.step_index += self.step_speed
+        if self.step_index >= len(step):
+            self.step_index = 0
+        
+
+        self.step_sound = step[int(self.step_index)]
+
+        if self.last_step != int(self.step_index):
+            self.step_sound.play()
+
     def get_input(self):
         keys = pygame.key.get_pressed()
 
@@ -130,6 +156,7 @@ class Player(pygame.sprite.Sprite):
         else:
             if self.direction.x != 0 and self.on_ground:
                 self.status = "run"
+                self.foot_step()
             elif self.want_crouch:
                 self.status = "crouch"
             elif self.on_ground:
