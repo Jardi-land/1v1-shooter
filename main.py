@@ -17,8 +17,6 @@ clock = pygame.time.Clock()
 bg_surf = pygame.Surface((screen_res[0], screen_res[1]))
 bg_surf.fill((118, 120, 134, 255))
 
-#platform_x = screen_res[0] - (165*screen_scale)
-#platform_y = screen_res[1] - (155*screen_scale)
 
 level = Level(firstmap, screen)
 
