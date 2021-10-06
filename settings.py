@@ -1,5 +1,5 @@
 screen_res = [1920, 1080]
-screen_scale = [1920/screen_res[0], 1080/screen_res[1]]
+screen_scale = [screen_res[0]/1920, screen_res[1]/1080]
 window_name = "1v1 Shooter"
 
 # " " = nothing
