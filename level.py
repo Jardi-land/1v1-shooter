@@ -5,7 +5,7 @@ Creator: @Lorenzo_De_ZEN
 import sys, pygame
 from settings import *
 from tiles import Tiles
-from player import Player
+from player import Player, Player_2
 
 class Level:
     def __init__(self,level_data,surface):
@@ -17,6 +17,7 @@ class Level:
     def setup_level(self,layout):
         self.Tiles = pygame.sprite.Group()
         self.Player = pygame.sprite.GroupSingle()
+        self.Player_2 = pygame.sprite.GroupSingle()
 
         for i in range(18):
                 if i == 0:
@@ -43,8 +44,12 @@ class Level:
                     elif layout[line_i][11-i] == "P":
                         player_sprite = Player((platform_x,platform_y))
                         self.Player.add(player_sprite)
+                    elif layout[line_i][11-i] == "P2":
+                        player_2_sprite = Player_2((platform_x,platform_y))
+                        self.Player_2.add(player_2_sprite)
 
     def horizontal_movement_collision(self):
+        #Player 1
         Player = self.Player.sprite
         Player.rect.x += Player.direction.x * Player.speed
 
@@ -65,7 +70,29 @@ class Level:
         if Player.on_right and (Player.rect.right > self.current_x or Player.direction.x <= 0):
             Player.on_right = False
 
+        #Player 2
+        Player_2 = self.Player_2.sprite
+        Player_2.rect.x += Player_2.direction.x * Player_2.speed
+
+        for sprite in self.Tiles.sprites():
+            if sprite.colliderect.colliderect(Player_2.rect):
+                if Player_2.direction.x < 0:
+                    Player_2.rect.left = sprite.colliderect.right
+                    Player_2.on_left = True
+                    self.current_x = Player_2.rect.left
+                elif Player_2.direction.x > 0:
+                    Player_2.rect.right = sprite.colliderect.left
+                    Player_2.on_right = True
+                    self.current_x = Player_2.rect.right
+        
+        if Player_2.on_left and (Player_2.rect.left < self.current_x or Player_2.direction.x >= 0):
+            Player_2.on_left = False
+
+        if Player_2.on_right and (Player_2.rect.right > self.current_x or Player_2.direction.x <= 0):
+            Player_2.on_right = False
+
     def vertical_movement_collision(self):
+        #Player 1
         Player = self.Player.sprite
         Player.apply_gravity()
 
@@ -84,7 +111,27 @@ class Level:
             Player.on_ground = False
         if Player.on_ceiling and Player.direction.y > 0:
             Player.on_ceiling = False
-   
+
+        #Player 2
+        Player_2 = self.Player_2.sprite
+        Player_2.apply_gravity()
+
+        for sprite in self.Tiles.sprites():
+            if sprite.colliderect.colliderect(Player_2.rect):
+                if Player_2.direction.y > 0:
+                    Player_2.rect.bottom = sprite.colliderect.top
+                    Player_2.direction.y = 0
+                    Player_2.on_ground = True
+                elif Player_2.direction.y < 0:
+                    Player_2.rect.top = sprite.colliderect.bottom
+                    Player_2.direction.y = 0
+                    Player_2.on_ceiling = True
+        
+        if Player_2.on_ground and Player_2.direction.y < 0 or Player_2.direction.y > 1:
+            Player_2.on_ground = False
+        if Player_2.on_ceiling and Player_2.direction.y > 0:
+            Player_2.on_ceiling = False
+
     def draw(self):
         #Tiles
         self.Tiles.update(self.world_shift)
@@ -92,6 +139,8 @@ class Level:
 
         #Player
         self.Player.update()
+        self.Player_2.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
         self.Player.draw(self.display_surface)
+        self.Player_2.draw(self.display_surface)
