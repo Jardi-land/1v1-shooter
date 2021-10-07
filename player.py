@@ -209,7 +209,7 @@ class Player_2(pygame.sprite.Sprite):
         self.single_w = True
 
     def import_character_assets(self):
-        character_path = "game_files/characters/green/"
+        character_path = "game_files/characters/red/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
         self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(240*screen_scale), int(240*screen_scale)]}
