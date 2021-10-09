@@ -13,6 +13,7 @@ pygame.init()
 screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
 pygame.display.set_caption(window_name)
 clock = pygame.time.Clock()
+pygame.mouse.set_visible(mouse_visible)
 
 bg_surf = pygame.Surface((screen_res[0], screen_res[1]))
 bg_surf.fill((118, 120, 134, 255))

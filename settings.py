@@ -2,6 +2,7 @@ screen_res_array = {"hd":[1920, 1080],"2":[1536, 864],"3":[1152, 648],"4":[768, 
 screen_res = screen_res_array["hd"]
 screen_scale = screen_res[0]/1920
 window_name = "1v1 Shooter"
+mouse_visible = False
 
 # " " = nothing
 # "X" = Platform
