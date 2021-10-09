@@ -6,6 +6,7 @@ import sys, pygame
 from settings import *
 from tiles import Tiles
 from player import Player, Player_2
+from bullet import Bullet
 
 class Level:
     def __init__(self,level_data,surface):
@@ -13,6 +14,8 @@ class Level:
         self.setup_level(level_data)
         self.world_shift = 0
         self.current_x = 0
+        self.Bullet_p1 = pygame.sprite.Group()
+        self.Bullet_p2 = pygame.sprite.Group()
 
     def setup_level(self,layout):
         self.Tiles = pygame.sprite.Group()
@@ -132,12 +135,27 @@ class Level:
         if Player_2.on_ceiling and Player_2.direction.y > 0:
             Player_2.on_ceiling = False
 
+    def bullet_display(self):
+        Player = self.Player.sprite
+        Player_2 = self.Player_2.sprite
+        
+        if Player.shooting():
+            self.Bullet_p1.add(Bullet((Player.rect.x, Player.rect.y), Player.facing_right))
+        if Player_2.shooting():
+            self.Bullet_p2.add(Bullet((Player_2.rect.x, Player_2.rect.y), Player_2.facing_right))
+
+        self.Bullet_p1.update()
+        self.Bullet_p2.update()
+
     def draw(self):
         #Tiles
         self.Tiles.update(self.world_shift)
         self.Tiles.draw(self.display_surface)
 
         #Player
+        self.bullet_display()
+        self.Bullet_p1.draw(self.display_surface)
+        self.Bullet_p2.draw(self.display_surface)
         self.Player.update()
         self.Player_2.update()
         self.horizontal_movement_collision()

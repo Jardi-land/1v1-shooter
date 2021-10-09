@@ -149,6 +149,13 @@ class Player(pygame.sprite.Sprite):
         if self.on_ground:
             self.double_jump = 2
 
+    def shooting(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_e]:
+            return True
+        else:
+            return False
+
     def get_status(self):
         if self.direction.y < 0:
             self.status = "jump"
@@ -316,6 +323,13 @@ class Player_2(pygame.sprite.Sprite):
 
         if self.on_ground:
             self.double_jump = 2
+
+    def shooting(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RCTRL]:
+            return True
+        else:
+            return False
     
     def get_status(self):
         if self.direction.y < 0:
