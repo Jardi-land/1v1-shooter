@@ -138,14 +138,14 @@ class Level:
     def bullet_display(self):
         Player = self.Player.sprite
         Player_2 = self.Player_2.sprite
+
+        self.Bullet_p1.update()
+        self.Bullet_p2.update()
         
         if Player.shooting():
             self.Bullet_p1.add(Bullet((Player.rect.x, Player.rect.y), Player.facing_right))
         if Player_2.shooting():
             self.Bullet_p2.add(Bullet((Player_2.rect.x, Player_2.rect.y), Player_2.facing_right))
-
-        self.Bullet_p1.update()
-        self.Bullet_p2.update()
 
     def draw(self):
         #Tiles
