@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.step_speed = 0.0525
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
+        self.bullet_spot = [self.rect.x, self.rect.y]
 
         #Player Movement
         self.direction = pygame.math.Vector2(0,0)
@@ -149,6 +150,40 @@ class Player(pygame.sprite.Sprite):
         if self.on_ground:
             self.double_jump = 2
 
+    def get_bullet_pos(self):
+        self.right_idle_spot = [[self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
+        self.right_run_spot =   [[self.rect.right + self.speed, self.rect.top + (17 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (15 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale]]
+        self.right_jump_spot = [[self.rect.right, self.rect.top + (17 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
+        self.right_crouch_spot = [[self.rect.right, self.rect.top + (16 * 5) * screen_scale], [self.rect.right, self.rect.top + (17 * 5) * screen_scale], [self.rect.right, self.rect.top + (20 * 5) * screen_scale]]
+
+        self.left_idle_spot = [[self.rect.left - (3 * 5) * screen_scale, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale]]
+        self.left_run_spot =   [[self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (17 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (18 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (18 * 5) * screen_scale]]
+        self.left_jump_spot = [[self.rect.left - (3 * 5) * screen_scale, self.rect.top + (17 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale]]
+        self.left_crouch_spot = [[self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (17 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (20 * 5) * screen_scale]]
+        
+        if self.facing_right:
+            if self.status == "idle":
+                self.bullet_spot = self.right_idle_spot[int(self.frame_index)]
+            elif self.status == "run":
+                self.bullet_spot = self.right_run_spot[int(self.frame_index)]
+            elif self.status == "jump" and self.direction.x != 0:
+                self.bullet_spot = [self.right_jump_spot[int(self.frame_index)][0] + self.speed, self.right_jump_spot[int(self.frame_index)][1]]
+            elif self.status == "jump":
+                self.bullet_spot = self.right_jump_spot[int(self.frame_index)]
+            elif self.status == "crouch":
+                self.bullet_spot = self.right_crouch_spot[int(self.frame_index)]
+        else:
+            if self.status == "idle":
+                self.bullet_spot = self.left_idle_spot[int(self.frame_index)]
+            elif self.status == "run":
+                self.bullet_spot = self.left_run_spot[int(self.frame_index)]
+            elif self.status == "jump" and self.direction.x != 0:
+                self.bullet_spot = [self.left_jump_spot[int(self.frame_index)][0] - self.speed, self.left_jump_spot[int(self.frame_index)][1]]
+            elif self.status == "jump":
+                self.bullet_spot = self.left_jump_spot[int(self.frame_index)]
+            elif self.status == "crouch":
+                self.bullet_spot = self.left_crouch_spot[int(self.frame_index)]
+
     def shooting(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_e]:
@@ -181,6 +216,7 @@ class Player(pygame.sprite.Sprite):
         self.get_input()
         self.get_status()
         self.animate()
+        self.get_bullet_pos()
 
 
 class Player_2(pygame.sprite.Sprite):
@@ -193,6 +229,7 @@ class Player_2(pygame.sprite.Sprite):
         self.step_speed = 0.0525
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
+        self.bullet_spot = [self.rect.x, self.rect.y]
 
         #Player Movement
         self.direction = pygame.math.Vector2(0,0)
@@ -324,6 +361,40 @@ class Player_2(pygame.sprite.Sprite):
         if self.on_ground:
             self.double_jump = 2
 
+    def get_bullet_pos(self):
+        self.right_idle_spot = [[self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
+        self.right_run_spot =   [[self.rect.right + self.speed, self.rect.top + (17 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (15 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale]]
+        self.right_jump_spot = [[self.rect.right, self.rect.top + (17 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
+        self.right_crouch_spot = [[self.rect.right, self.rect.top + (16 * 5) * screen_scale], [self.rect.right, self.rect.top + (17 * 5) * screen_scale], [self.rect.right, self.rect.top + (20 * 5) * screen_scale]]
+
+        self.left_idle_spot = [[self.rect.left - (3 * 5) * screen_scale, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale]]
+        self.left_run_spot =   [[self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (17 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (15 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (18 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale - self.speed, self.rect.top + (18 * 5) * screen_scale]]
+        self.left_jump_spot = [[self.rect.left - (3 * 5) * screen_scale, self.rect.top + (17 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale]]
+        self.left_crouch_spot = [[self.rect.left - (3 * 5) * screen_scale, self.rect.top + (16 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (17 * 5) * screen_scale], [self.rect.left - (3 * 5) * screen_scale, self.rect.top + (20 * 5) * screen_scale]]
+        
+        if self.facing_right:
+            if self.status == "idle":
+                self.bullet_spot = self.right_idle_spot[int(self.frame_index)]
+            elif self.status == "run":
+                self.bullet_spot = self.right_run_spot[int(self.frame_index)]
+            elif self.status == "jump" and self.direction.x != 0:
+                self.bullet_spot = [self.right_jump_spot[int(self.frame_index)][0] + self.speed, self.right_jump_spot[int(self.frame_index)][1]]
+            elif self.status == "jump":
+                self.bullet_spot = self.right_jump_spot[int(self.frame_index)]
+            elif self.status == "crouch":
+                self.bullet_spot = self.right_crouch_spot[int(self.frame_index)]
+        else:
+            if self.status == "idle":
+                self.bullet_spot = self.left_idle_spot[int(self.frame_index)]
+            elif self.status == "run":
+                self.bullet_spot = self.left_run_spot[int(self.frame_index)]
+            elif self.status == "jump" and self.direction.x != 0:
+                self.bullet_spot = [self.left_jump_spot[int(self.frame_index)][0] - self.speed, self.left_jump_spot[int(self.frame_index)][1]]
+            elif self.status == "jump":
+                self.bullet_spot = self.left_jump_spot[int(self.frame_index)]
+            elif self.status == "crouch":
+                self.bullet_spot = self.left_crouch_spot[int(self.frame_index)]
+
     def shooting(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RCTRL]:
@@ -356,3 +427,4 @@ class Player_2(pygame.sprite.Sprite):
         self.get_input()
         self.get_status()
         self.animate()
+        self.get_bullet_pos()

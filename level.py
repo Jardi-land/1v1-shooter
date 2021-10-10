@@ -143,9 +143,9 @@ class Level:
         self.Bullet_p2.update()
         
         if Player.shooting():
-            self.Bullet_p1.add(Bullet((Player.rect.x, Player.rect.y), Player.facing_right))
+            self.Bullet_p1.add(Bullet((Player.bullet_spot[0], Player.bullet_spot[1]), Player.facing_right))
         if Player_2.shooting():
-            self.Bullet_p2.add(Bullet((Player_2.rect.x, Player_2.rect.y), Player_2.facing_right))
+            self.Bullet_p2.add(Bullet((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
 
     def draw(self):
         #Tiles
@@ -153,12 +153,12 @@ class Level:
         self.Tiles.draw(self.display_surface)
 
         #Player
-        self.bullet_display()
-        self.Bullet_p1.draw(self.display_surface)
-        self.Bullet_p2.draw(self.display_surface)
         self.Player.update()
         self.Player_2.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
+        self.bullet_display()
+        self.Bullet_p1.draw(self.display_surface)
+        self.Bullet_p2.draw(self.display_surface)
         self.Player.draw(self.display_surface)
         self.Player_2.draw(self.display_surface)
