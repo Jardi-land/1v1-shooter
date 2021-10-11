@@ -16,8 +16,8 @@ class Level:
         self.current_x = 0
         self.Bullet_p1 = pygame.sprite.Group()
         self.Bullet_p2 = pygame.sprite.Group()
-        self.Muzzle_p1 = pygame.sprite.Group()
-        self.Muzzle_p2 = pygame.sprite.Group()
+        self.Muzzle_p1 = pygame.sprite.GroupSingle()
+        self.Muzzle_p2 = pygame.sprite.GroupSingle()
 
     def setup_level(self,layout):
         self.Tiles = pygame.sprite.Group()
@@ -150,9 +150,26 @@ class Level:
         if Player.shooting():
             self.Bullet_p1.add(Bullet((Player.bullet_spot[0], Player.bullet_spot[1]), Player.facing_right))
             self.Muzzle_p1.add(Muzzle_flash((Player.bullet_spot[0], Player.bullet_spot[1]), Player.facing_right))
+
+            self.muzzle_collide("p1")
         if Player_2.shooting():
             self.Bullet_p2.add(Bullet((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
             self.Muzzle_p2.add(Muzzle_flash((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
+
+            self.muzzle_collide("p2")
+
+    def muzzle_collide(self, player):
+        Muzzle_p1 = self.Muzzle_p1.sprite
+        Muzzle_p2 = self.Muzzle_p2.sprite
+
+        if player == "p1":
+            for sprite in self.Tiles.sprites():
+                    if sprite.colliderect.colliderect(Muzzle_p1.rect):
+                        self.Muzzle_p1.update()
+        else:
+            for sprite in self.Tiles.sprites():
+                    if sprite.colliderect.colliderect(Muzzle_p2.rect):
+                        self.Muzzle_p2.update()
 
     def draw(self):
         #Tiles
