@@ -19,6 +19,8 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
         self.bullet_spot = [self.rect.x, self.rect.y]
+        self.cooldown_bol = True
+        self.cooldown_frame = 90 #Frame per sec = 60 => 2 sec
 
         #Player Movement
         self.direction = pygame.math.Vector2(0,0)
@@ -186,9 +188,14 @@ class Player(pygame.sprite.Sprite):
 
     def shooting(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_e]:
+        if keys[pygame.K_e] and self.cooldown_bol:
+            self.cooldown_frame = 0
+            self.cooldown_bol = False
             return True
         else:
+            self.cooldown_frame += 1
+            if self.cooldown_frame == 90:
+                self.cooldown_bol = True
             return False
 
     def get_status(self):
@@ -230,6 +237,8 @@ class Player_2(pygame.sprite.Sprite):
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
         self.bullet_spot = [self.rect.x, self.rect.y]
+        self.cooldown_bol = True
+        self.cooldown_frame = 90 #Frame per sec = 60 => 2 sec
 
         #Player Movement
         self.direction = pygame.math.Vector2(0,0)
@@ -397,9 +406,14 @@ class Player_2(pygame.sprite.Sprite):
 
     def shooting(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RCTRL]:
+        if keys[pygame.K_RCTRL] and self.cooldown_bol:
+            self.cooldown_frame = 0
+            self.cooldown_bol = False
             return True
         else:
+            self.cooldown_frame += 1
+            if self.cooldown_frame == 90:
+                self.cooldown_bol = True
             return False
     
     def get_status(self):
