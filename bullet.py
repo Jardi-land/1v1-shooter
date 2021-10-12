@@ -15,6 +15,9 @@ class Bullet(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.x += self.speed
+        
+        if self.rect.x < 0 or self.rect.x > 1920 * screen_scale:
+            self.kill()
 
 class Muzzle_flash(pygame.sprite.Sprite):
     def __init__(self,pos,direct):
