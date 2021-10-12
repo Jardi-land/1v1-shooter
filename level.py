@@ -156,6 +156,19 @@ class Level:
             self.Bullet_p2.add(Bullet((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
             self.Muzzle_p2.add(Muzzle_flash((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
 
+    def bullet_collide(self):
+        #Bullet Player 1
+        for sprite in self.Tiles.sprites():
+            for bullet in self.Bullet_p1.sprites():
+                if sprite.colliderect.colliderect(bullet.rect):
+                    bullet.kill()
+
+        #Bullet Player 2
+        for sprite in self.Tiles.sprites():
+            for bullet in self.Bullet_p2.sprites():
+                if sprite.colliderect.colliderect(bullet.rect):
+                    bullet.kill()
+
     def draw(self):
         #Tiles
         self.Tiles.update(self.world_shift)
@@ -167,6 +180,7 @@ class Level:
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
         self.bullet_display()
+        self.bullet_collide()
         self.Bullet_p1.draw(self.display_surface)
         self.Bullet_p2.draw(self.display_surface)
         self.Muzzle_p1.draw(self.display_surface)
