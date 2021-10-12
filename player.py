@@ -12,24 +12,30 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,pos):
         super().__init__()
         self.import_character_assets()
+
+        # Animations
         self.frame_index = 0
         self.animation_speed = 0.15
-        self.step_index = 0
-        self.step_speed = 0.0525
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
+
+        # Step Sounds
+        self.step_index = 0
+        self.step_speed = 0.0525
+
+        # Bullet
         self.bullet_spot = [self.rect.x, self.rect.y]
         self.cooldown_bol = True
         self.cooldown_frame = 90 #Frame per sec = 60 => 2 sec
 
-        #Player Movement
+        # Player Movement
         self.direction = pygame.math.Vector2(0,0)
         self.speed = 10*screen_scale
         self.gravity = 0.8*screen_scale
         self.jump_speed = -15*screen_scale
         self.double_jump = 2
 
-        #Player Status
+        # Player Status
         self.status = "idle"
         self.facing_right = True
         self.on_ground = False
@@ -40,10 +46,11 @@ class Player(pygame.sprite.Sprite):
         self.stop_index_crouch = False
         self.want_crouch = False
 
-        #Player input
+        # Player input
         self.single_w = True
 
     def import_character_assets(self):
+        # Import all char. frames (and sounds)
         character_path = "game_files/characters/green/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
@@ -61,6 +68,7 @@ class Player(pygame.sprite.Sprite):
             self.sounds[sound] = import_sounds(full_path)
 
     def animate(self):
+        # Play the right animation
         self.animation = self.animations[self.status]
 
         if self.status == "jump":
@@ -93,7 +101,7 @@ class Player(pygame.sprite.Sprite):
             flipped_image = pygame.transform.flip(self.image,True,False)
             self.image = flipped_image
         
-        #Set the rect
+        # Set the rect
         if self.on_ground and self.on_right:
             self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
         elif self.on_ground and self.on_left:
@@ -108,6 +116,7 @@ class Player(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
 
     def foot_step(self):
+        # Foot step sounds
         self.step = self.sounds["walk"]
 
         self.last_step = int(self.step_index)
@@ -123,6 +132,7 @@ class Player(pygame.sprite.Sprite):
             self.step_sound.play()
 
     def get_input(self):
+        # Get inputs for movement
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_d] and keys[pygame.K_a]:
@@ -153,6 +163,7 @@ class Player(pygame.sprite.Sprite):
             self.double_jump = 2
 
     def get_bullet_pos(self):
+        # Find the right spot for the bullet
         self.right_idle_spot = [[self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
         self.right_run_spot =   [[self.rect.right + self.speed, self.rect.top + (17 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (15 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale]]
         self.right_jump_spot = [[self.rect.right, self.rect.top + (17 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
@@ -187,6 +198,7 @@ class Player(pygame.sprite.Sprite):
                 self.bullet_spot = self.left_crouch_spot[int(self.frame_index)]
 
     def shooting(self):
+        # Shooting input + cooldown
         keys = pygame.key.get_pressed()
         if keys[pygame.K_e] and self.cooldown_bol:
             self.cooldown_frame = 0
@@ -199,6 +211,7 @@ class Player(pygame.sprite.Sprite):
             return False
 
     def get_status(self):
+        # Define the status for animations
         if self.direction.y < 0:
             self.status = "jump"
         elif self.direction.y > 1:
@@ -213,10 +226,12 @@ class Player(pygame.sprite.Sprite):
                 self.status = "idle"
 
     def apply_gravity(self):
+        # G for player
         self.direction.y += self.gravity
         self.rect.y += self.direction.y
 
     def jump(self):
+        # Jump for player
         self.direction.y = self.jump_speed
 
     def update(self):
@@ -230,26 +245,32 @@ class Player_2(pygame.sprite.Sprite):
     def __init__(self,pos):
         super().__init__()
         self.import_character_assets()
+
+        # Animations
         self.frame_index = 0
         self.animation_speed = 0.15
-        self.step_index = 0
-        self.step_speed = 0.0525
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
+
+        # Step Sounds
+        self.step_index = 0
+        self.step_speed = 0.0525
+
+        # Bullet
         self.bullet_spot = [self.rect.x, self.rect.y]
         self.cooldown_bol = True
         self.cooldown_frame = 90 #Frame per sec = 60 => 2 sec
 
-        #Player Movement
+        # Player Movement
         self.direction = pygame.math.Vector2(0,0)
         self.speed = 10*screen_scale
         self.gravity = 0.8*screen_scale
         self.jump_speed = -15*screen_scale
         self.double_jump = 2
 
-        #Player Status
+        # Player Status
         self.status = "idle"
-        self.facing_right = False
+        self.facing_right = True
         self.on_ground = False
         self.on_ceiling = False
         self.on_left = False
@@ -258,10 +279,11 @@ class Player_2(pygame.sprite.Sprite):
         self.stop_index_crouch = False
         self.want_crouch = False
 
-        #Player input
+        # Player input
         self.single_w = True
 
     def import_character_assets(self):
+        # Import all char. frames (and sounds)
         character_path = "game_files/characters/red/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
@@ -279,6 +301,7 @@ class Player_2(pygame.sprite.Sprite):
             self.sounds[sound] = import_sounds(full_path)
 
     def animate(self):
+        # Play the right animation
         self.animation = self.animations[self.status]
 
         if self.status == "jump":
@@ -311,7 +334,7 @@ class Player_2(pygame.sprite.Sprite):
             flipped_image = pygame.transform.flip(self.image,True,False)
             self.image = flipped_image
         
-        #Set the rect
+        # Set the rect
         if self.on_ground and self.on_right:
             self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
         elif self.on_ground and self.on_left:
@@ -326,6 +349,7 @@ class Player_2(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
 
     def foot_step(self):
+        # Foot step sounds
         self.step = self.sounds["walk"]
 
         self.last_step = int(self.step_index)
@@ -341,6 +365,7 @@ class Player_2(pygame.sprite.Sprite):
             self.step_sound.play()
 
     def get_input(self):
+        # Get inputs for movement
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT] and keys[pygame.K_LEFT]:
@@ -371,6 +396,7 @@ class Player_2(pygame.sprite.Sprite):
             self.double_jump = 2
 
     def get_bullet_pos(self):
+        # Find the right spot for the bullet
         self.right_idle_spot = [[self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (15 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
         self.right_run_spot =   [[self.rect.right + self.speed, self.rect.top + (17 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (15 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (16 * 5) * screen_scale], [self.rect.right + self.speed, self.rect.top + (18 * 5) * screen_scale]]
         self.right_jump_spot = [[self.rect.right, self.rect.top + (17 * 5) * screen_scale], [self.rect.right, self.rect.top + (16 * 5) * screen_scale]]
@@ -405,6 +431,7 @@ class Player_2(pygame.sprite.Sprite):
                 self.bullet_spot = self.left_crouch_spot[int(self.frame_index)]
 
     def shooting(self):
+        # Shooting input + cooldown
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RCTRL] and self.cooldown_bol:
             self.cooldown_frame = 0
@@ -417,6 +444,7 @@ class Player_2(pygame.sprite.Sprite):
             return False
     
     def get_status(self):
+        # Define the status for animations
         if self.direction.y < 0:
             self.status = "jump"
         elif self.direction.y > 1:
@@ -431,10 +459,12 @@ class Player_2(pygame.sprite.Sprite):
                 self.status = "idle"
 
     def apply_gravity(self):
+        # G for player
         self.direction.y += self.gravity
         self.rect.y += self.direction.y
 
     def jump(self):
+        # Jump for the player
         self.direction.y = self.jump_speed
 
     def update(self):

@@ -10,20 +10,25 @@ from bullet import Bullet, Muzzle_flash
 
 class Level:
     def __init__(self,level_data,surface):
+        # The Map
         self.display_surface = surface
         self.setup_level(level_data)
         self.world_shift = 0
         self.current_x = 0
+
+        # Shooting
         self.Bullet_p1 = pygame.sprite.Group()
         self.Bullet_p2 = pygame.sprite.Group()
         self.Muzzle_p1 = pygame.sprite.GroupSingle()
         self.Muzzle_p2 = pygame.sprite.GroupSingle()
 
     def setup_level(self,layout):
+        # Sprite(s) groups
         self.Tiles = pygame.sprite.Group()
         self.Player = pygame.sprite.GroupSingle()
         self.Player_2 = pygame.sprite.GroupSingle()
 
+        # Map Core
         for i in range(18):
                 if i == 0:
                     platform_y = screen_res[1] - (155*screen_scale)
@@ -54,7 +59,7 @@ class Level:
                         self.Player_2.add(player_2_sprite)
 
     def horizontal_movement_collision(self):
-        #Player 1
+        # Player 1
         Player = self.Player.sprite
         Player.rect.x += Player.direction.x * Player.speed
 
@@ -75,7 +80,7 @@ class Level:
         if Player.on_right and (Player.rect.right > self.current_x or Player.direction.x <= 0):
             Player.on_right = False
 
-        #Player 2
+        # Player 2
         Player_2 = self.Player_2.sprite
         Player_2.rect.x += Player_2.direction.x * Player_2.speed
 
@@ -97,7 +102,7 @@ class Level:
             Player_2.on_right = False
 
     def vertical_movement_collision(self):
-        #Player 1
+        # Player 1
         Player = self.Player.sprite
         Player.apply_gravity()
 
@@ -117,7 +122,7 @@ class Level:
         if Player.on_ceiling and Player.direction.y > 0:
             Player.on_ceiling = False
 
-        #Player 2
+        # Player 2
         Player_2 = self.Player_2.sprite
         Player_2.apply_gravity()
 
@@ -157,33 +162,37 @@ class Level:
             self.Muzzle_p2.add(Muzzle_flash((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
 
     def bullet_collide(self):
-        #Bullet Player 1
+        # Bullet Player 1
         for sprite in self.Tiles.sprites():
             for bullet in self.Bullet_p1.sprites():
                 if sprite.colliderect.colliderect(bullet.rect):
                     bullet.kill()
 
-        #Bullet Player 2
+        # Bullet Player 2
         for sprite in self.Tiles.sprites():
             for bullet in self.Bullet_p2.sprites():
                 if sprite.colliderect.colliderect(bullet.rect):
                     bullet.kill()
 
     def draw(self):
-        #Tiles
+        # Tiles
         self.Tiles.update(self.world_shift)
         self.Tiles.draw(self.display_surface)
 
-        #Player
+        # Player (1/2)
         self.Player.update()
         self.Player_2.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
+
+        # Bullet
         self.bullet_display()
         self.bullet_collide()
         self.Bullet_p1.draw(self.display_surface)
         self.Bullet_p2.draw(self.display_surface)
         self.Muzzle_p1.draw(self.display_surface)
         self.Muzzle_p2.draw(self.display_surface)
+
+        # Player (2/2)
         self.Player.draw(self.display_surface)
         self.Player_2.draw(self.display_surface)
