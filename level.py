@@ -167,12 +167,18 @@ class Level:
             for bullet in self.Bullet_p1.sprites():
                 if sprite.colliderect.colliderect(bullet.rect):
                     bullet.kill()
+                elif bullet.rect.colliderect(self.Player_2.rect):
+                    bullet.kill()
+                    self.Player_2.health -= 5
 
         # Bullet Player 2
         for sprite in self.Tiles.sprites():
             for bullet in self.Bullet_p2.sprites():
                 if sprite.colliderect.colliderect(bullet.rect):
                     bullet.kill()
+                elif bullet.rect.colliderect(self.Player.rect):
+                    bullet.kill()
+                    self.Player.health -= 5
 
     def draw(self):
         # Tiles
