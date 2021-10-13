@@ -46,6 +46,7 @@ class Player(pygame.sprite.Sprite):
         self.stop_index_crouch = False
         self.want_crouch = False
         self.health = 100
+        self.is_alive = True
 
         # Player input
         self.single_w = True
@@ -238,6 +239,10 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.get_input()
         self.get_status()
+
+        if self.health <= 0 and self.health > -50:
+            self.is_alive = False
+
         self.animate()
         self.get_bullet_pos()
 
@@ -280,6 +285,7 @@ class Player_2(pygame.sprite.Sprite):
         self.stop_index_crouch = False
         self.want_crouch = False
         self.health = 100
+        self.is_alive = True
 
         # Player input
         self.single_w = True
@@ -472,5 +478,10 @@ class Player_2(pygame.sprite.Sprite):
     def update(self):
         self.get_input()
         self.get_status()
+        
+        if self.health <= 0 and self.health > -50:
+            self.is_alive = False
+
+        
         self.animate()
         self.get_bullet_pos()
