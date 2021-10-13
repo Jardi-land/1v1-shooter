@@ -20,6 +20,6 @@ def main_menu():
             
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    return False
-    
+                    pygame.quit()
+                    exit()
 
