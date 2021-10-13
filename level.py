@@ -172,7 +172,7 @@ class Level:
                     bullet.kill()
                 elif bullet.rect.colliderect(Player_2.rect):
                     bullet.kill()
-                    Player_2.health -= 5
+                    Player_2.health -= bullet.damage
 
         # Bullet Player 2
         for sprite in self.Tiles.sprites():
@@ -181,7 +181,7 @@ class Level:
                     bullet.kill()
                 elif bullet.rect.colliderect(Player.rect):
                     bullet.kill()
-                    Player.health -= 5
+                    Player.health -= bullet.damage
 
     def draw(self):
         # Tiles
@@ -193,7 +193,6 @@ class Level:
         self.Player_2.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
-        print('v1: ', self.Player.sprite.health, 'v2: ', self.Player_2.sprite.health)
 
         # Bullet
         self.bullet_display()
@@ -206,3 +205,6 @@ class Level:
         # Player (2/2)
         self.Player.draw(self.display_surface)
         self.Player_2.draw(self.display_surface)
+        print(self.Player.sprite.is_alive, self.Player_2.sprite.is_alive)
+
+        #Overlay
