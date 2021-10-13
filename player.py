@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         # Bullet
         self.bullet_spot = [self.rect.x, self.rect.y]
         self.cooldown_bol = True
-        self.cooldown_frame = 90 #Frame per sec = 60 => 2 sec
+        self.cooldown_frame = 90 #Frame per sec = 60 => 1 sec
 
         # Player Movement
         self.direction = pygame.math.Vector2(0,0)
@@ -45,6 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.stop_index_jump = False
         self.stop_index_crouch = False
         self.want_crouch = False
+        self.health = 100
 
         # Player input
         self.single_w = True
@@ -278,6 +279,7 @@ class Player_2(pygame.sprite.Sprite):
         self.stop_index_jump = False
         self.stop_index_crouch = False
         self.want_crouch = False
+        self.health = 100
 
         # Player input
         self.single_w = True

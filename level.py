@@ -162,17 +162,26 @@ class Level:
             self.Muzzle_p2.add(Muzzle_flash((Player_2.bullet_spot[0], Player_2.bullet_spot[1]), Player_2.facing_right))
 
     def bullet_collide(self):
+        Player = self.Player.sprite
+        Player_2 = self.Player_2.sprite
+
         # Bullet Player 1
         for sprite in self.Tiles.sprites():
             for bullet in self.Bullet_p1.sprites():
                 if sprite.colliderect.colliderect(bullet.rect):
                     bullet.kill()
+                elif bullet.rect.colliderect(Player_2.rect):
+                    bullet.kill()
+                    Player_2.health -= 5
 
         # Bullet Player 2
         for sprite in self.Tiles.sprites():
             for bullet in self.Bullet_p2.sprites():
                 if sprite.colliderect.colliderect(bullet.rect):
                     bullet.kill()
+                elif bullet.rect.colliderect(Player.rect):
+                    bullet.kill()
+                    Player.health -= 5
 
     def draw(self):
         # Tiles
