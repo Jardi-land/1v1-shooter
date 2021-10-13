@@ -193,6 +193,7 @@ class Level:
         self.Player_2.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
+        print('v1: ', self.Player.sprite.health, 'v2: ', self.Player_2.sprite.health)
 
         # Bullet
         self.bullet_display()
