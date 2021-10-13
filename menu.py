@@ -1,7 +1,7 @@
 import os
 import sys, pygame
 from settings import *
-from main import main
+
 
 def main_menu():
     screen = pygame.display.set_mode((400, 400))
@@ -20,4 +20,5 @@ def main_menu():
             
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
                     return False
