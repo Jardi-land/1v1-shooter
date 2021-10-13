@@ -1,6 +1,7 @@
 import os
 import sys, pygame
 from settings import *
+from main import main
 
 def main_menu():
     screen = pygame.display.set_mode((400, 400))
