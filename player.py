@@ -227,7 +227,7 @@ class Player(pygame.sprite.Sprite):
             elif self.on_ground:
                 self.status = "idle"
 
-    def is_alive(self):
+    def is_alive_func(self):
         # Change the player death status
         if self.health <= 0 and self.health > -50:
             self.is_alive = False
@@ -246,7 +246,7 @@ class Player(pygame.sprite.Sprite):
         self.get_status()
         self.animate()
         self.get_bullet_pos()
-        self.is_alive()
+        self.is_alive_func()
 
 
 class Player_2(pygame.sprite.Sprite):
