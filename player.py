@@ -481,7 +481,7 @@ class Player_2(pygame.sprite.Sprite):
         self.get_input()
         self.get_status()
         
-        if self.health <= 0 and self.health > -50:
+        if self.health <= 0:
             self.is_alive = False
 
         
