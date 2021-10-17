@@ -278,7 +278,7 @@ class Player_2(pygame.sprite.Sprite):
 
         # Player Status
         self.status = "idle"
-        self.facing_right = True
+        self.facing_right = False
         self.on_ground = False
         self.on_ceiling = False
         self.on_left = False
