@@ -37,33 +37,33 @@ class Level:
 
         # Map Core
         for i in range(18):
+            if i == 0:
+                platform_y = screen_res[1] - (155*screen_scale)
+            else:
+                platform_y -= (60*screen_scale)
+            line_i = 17-i
+            for i in range(12):
                 if i == 0:
-                    platform_y = screen_res[1] - (155*screen_scale)
+                    platform_x = screen_res[0] - (165*screen_scale)
                 else:
-                    platform_y -= (60*screen_scale)
-                line_i = 17-i
-                for i in range(12):
-                    if i == 0:
-                        platform_x = screen_res[0] - (165*screen_scale)
-                    else:
-                        platform_x -= (160*screen_scale)
-                    if layout[line_i][11-i] == "X":
-                        Tile = Tiles((platform_x,platform_y),1)
-                        self.Tiles.add(Tile)
-                    elif layout[line_i][11-i] == " |":
-                        platform_x += (80*screen_scale)
-                        Tile = Tiles((platform_x,platform_y),0)
-                        self.Tiles.add(Tile)
-                        platform_x -= (80*screen_scale)
-                    elif layout[line_i][11-i] == "| ":
-                        Tile = Tiles((platform_x,platform_y),0)
-                        self.Tiles.add(Tile)
-                    elif layout[line_i][11-i] == "P":
-                        player_sprite = Player((platform_x,platform_y))
-                        self.Player.add(player_sprite)
-                    elif layout[line_i][11-i] == "P2":
-                        player_2_sprite = Player_2((platform_x,platform_y))
-                        self.Player_2.add(player_2_sprite)
+                    platform_x -= (160*screen_scale)
+                if layout[line_i][11-i] == "X":
+                    Tile = Tiles((platform_x,platform_y),1)
+                    self.Tiles.add(Tile)
+                elif layout[line_i][11-i] == " |":
+                    platform_x += (80*screen_scale)
+                    Tile = Tiles((platform_x,platform_y),0)
+                    self.Tiles.add(Tile)
+                    platform_x -= (80*screen_scale)
+                elif layout[line_i][11-i] == "| ":
+                    Tile = Tiles((platform_x,platform_y),0)
+                    self.Tiles.add(Tile)
+                elif layout[line_i][11-i] == "P":
+                    player_sprite = Player((platform_x,platform_y))
+                    self.Player.add(player_sprite)
+                elif layout[line_i][11-i] == "P2":
+                    player_2_sprite = Player_2((platform_x,platform_y))
+                    self.Player_2.add(player_2_sprite)
 
     def horizontal_movement_collision(self):
         # Player 1
