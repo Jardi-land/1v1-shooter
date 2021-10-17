@@ -45,7 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.stop_index_jump = False
         self.stop_index_crouch = False
         self.want_crouch = False
-        self.health = 100
+        self.health = 4
         self.is_alive = True
 
         # Player input
@@ -286,7 +286,7 @@ class Player_2(pygame.sprite.Sprite):
         self.stop_index_jump = False
         self.stop_index_crouch = False
         self.want_crouch = False
-        self.health = 100
+        self.health = 4
         self.is_alive = True
 
         # Player input
