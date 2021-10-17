@@ -7,6 +7,7 @@ from settings import *
 from tiles import Tiles
 from player import Player, Player_2
 from bullet import Bullet, Muzzle_flash
+from ui import ui
 
 class Level:
     def __init__(self,level_data,surface):
@@ -21,6 +22,12 @@ class Level:
         self.Bullet_p2 = pygame.sprite.Group()
         self.Muzzle_p1 = pygame.sprite.GroupSingle()
         self.Muzzle_p2 = pygame.sprite.GroupSingle()
+
+        # Ui
+        self.ui_p1 = pygame.sprite.Group()
+        self.ui_p2 = pygame.sprite.Group()
+        self.ui_p1.add(ui(1))
+        self.ui_p2.add(ui(2))
 
     def setup_level(self,layout):
         # Sprite(s) groups
@@ -173,6 +180,7 @@ class Level:
                 elif bullet.rect.colliderect(Player_2.rect):
                     bullet.kill()
                     Player_2.health -= bullet.damage
+                    self.ui_p2.update(2, Player_2.health)
 
         # Bullet Player 2
         for sprite in self.Tiles.sprites():
@@ -182,6 +190,11 @@ class Level:
                 elif bullet.rect.colliderect(Player.rect):
                     bullet.kill()
                     Player.health -= bullet.damage
+                    self.ui_p1.update(1, Player.health)
+
+    def ui(self):
+        self.ui_p1.draw(self.display_surface)
+        self.ui_p2.draw(self.display_surface)
 
     def draw(self):
         # Tiles
@@ -205,6 +218,6 @@ class Level:
         # Player (2/2)
         self.Player.draw(self.display_surface)
         self.Player_2.draw(self.display_surface)
-        print(self.Player.sprite.is_alive, self.Player_2.sprite.is_alive)
 
-        #Overlay
+        # Ui
+        self.ui()
