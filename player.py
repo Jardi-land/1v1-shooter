@@ -30,6 +30,7 @@ class Player(pygame.sprite.Sprite):
 
         # Player Movement
         self.direction = pygame.math.Vector2(0,0)
+        self.can_move = False
         self.speed = 10*screen_scale
         self.gravity = 0.8*screen_scale
         self.jump_speed = -15*screen_scale
@@ -242,8 +243,17 @@ class Player(pygame.sprite.Sprite):
         self.direction.y = self.jump_speed
 
     def update(self):
-        self.get_input()
+        if self.can_move:
+            self.get_input()
+
         self.get_status()
+        
+        if self.health <= 0:
+            self.is_alive = False
+
+        if self.cooldown_bol:
+            self.can_move = True
+
         self.animate()
         self.get_bullet_pos()
         self.is_alive_func()
@@ -266,11 +276,12 @@ class Player_2(pygame.sprite.Sprite):
 
         # Bullet
         self.bullet_spot = [self.rect.x, self.rect.y]
-        self.cooldown_bol = True
-        self.cooldown_frame = 90 #Frame per sec = 60 => 2 sec
+        self.cooldown_bol = False #comme ca on peut pas shooter direct
+        self.cooldown_frame = 0 #Frame per sec = 60 => 1 sec
 
         # Player Movement
         self.direction = pygame.math.Vector2(0,0)
+        self.can_move = False
         self.speed = 10*screen_scale
         self.gravity = 0.8*screen_scale
         self.jump_speed = -15*screen_scale
@@ -478,12 +489,16 @@ class Player_2(pygame.sprite.Sprite):
         self.direction.y = self.jump_speed
 
     def update(self):
-        self.get_input()
+        if self.can_move:
+            self.get_input()
+
         self.get_status()
         
         if self.health <= 0:
             self.is_alive = False
 
-        
+        if self.cooldown_bol:
+            self.can_move = True
+  
         self.animate()
         self.get_bullet_pos()
