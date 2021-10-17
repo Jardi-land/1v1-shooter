@@ -4,7 +4,7 @@ from settings import *
 class Bullet(pygame.sprite.Sprite):
     def __init__(self,pos,direct):
         super().__init__()
-        self.damage = 10
+        self.damage = 1
         if direct:
             # Right
             self.image = pygame.transform.scale(pygame.image.load("game_files/gun_files/SpongeBullet.png").convert_alpha(), (int(15*screen_scale), int(5*screen_scale)))
