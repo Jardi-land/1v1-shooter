@@ -8,11 +8,11 @@ class Bullet(pygame.sprite.Sprite):
         if direct:
             # Right
             self.image = pygame.transform.scale(pygame.image.load("game_files/gun_files/SpongeBullet.png").convert_alpha(), (int(15*screen_scale), int(5*screen_scale)))
-            self.speed = 100*screen_scale
+            self.speed = 75*screen_scale
         else:
             # Left
             self.image = pygame.transform.flip(pygame.transform.scale(pygame.image.load("game_files/gun_files/SpongeBullet.png").convert_alpha(), (int(15*screen_scale), int(5*screen_scale))),True,False)
-            self.speed = -100*screen_scale
+            self.speed = -75*screen_scale
 
         self.rect = self.image.get_rect(topleft = pos)
 
