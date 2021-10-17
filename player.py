@@ -229,7 +229,7 @@ class Player(pygame.sprite.Sprite):
 
     def is_alive_func(self):
         # Change the player death status
-        if self.health <= 0 and self.health > -50:
+        if self.health <= 0:
             self.is_alive = False
 
     def apply_gravity(self):
