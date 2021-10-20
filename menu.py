@@ -41,7 +41,7 @@ class button:
         self.size = pygame.math.Vector2(self.image.get_width(), self.image.get_height())
         self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
 
-        self.alternate_image = pygame.transform.scale(pygame.image.load(alternate_img).convert_alpha(), self.size) if alternate_img != None else None
+        self.alternate_image = pygame.transform.scale(pygame.image.load(alternate_img).convert_alpha(), (int(self.size[0]), int(self.size[1]))) if alternate_img != None else None
         self.default_image = self.image
 
     def draw(self, win):
