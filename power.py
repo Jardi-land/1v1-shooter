@@ -1,5 +1,5 @@
 import sys, pygame
-from setting import *
+from settings import *
 import random as rd
 
 class PowerUp:
