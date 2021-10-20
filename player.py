@@ -45,9 +45,11 @@ class Player(pygame.sprite.Sprite):
         self.on_right = False
         self.stop_index_jump = False
         self.stop_index_crouch = False
+        self.stop_index_death = False
         self.want_crouch = False
         self.health = 4
         self.is_alive = True
+        self.input = True
 
         # Player input
         self.single_w = True
@@ -57,7 +59,7 @@ class Player(pygame.sprite.Sprite):
         character_path = "game_files/characters/green/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
-        self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(240*screen_scale), int(240*screen_scale)]}
+        self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(175*screen_scale), int(170*screen_scale)]}
         self.sounds = {"walk":[]}
 
         for animation in self.animations.keys():
@@ -89,6 +91,14 @@ class Player(pygame.sprite.Sprite):
                     self.frame_index = 0
                 if int(self.frame_index) == len(self.animation) - 1:
                     self.stop_index_crouch = True
+
+        elif self.status == "death":
+            if self.stop_index_death == False:
+                self.frame_index += self.animation_speed
+                if self.frame_index >= len(self.animation):
+                    self.frame_index = 0
+                if int(self.frame_index) == len(self.animation) - 1:
+                    self.stop_index_death = True
 
         else:
             self.stop_index_crouch = False
@@ -138,26 +148,26 @@ class Player(pygame.sprite.Sprite):
         # Get inputs for movement
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_d] and keys[pygame.K_a]:
+        if keys[pygame.K_d] and keys[pygame.K_a] and self.input:
             self.direction.x = 0
-        elif keys[pygame.K_d]:
+        elif keys[pygame.K_d] and self.input:
             self.direction.x = 1
             self.facing_right = True
-        elif keys[pygame.K_a]:
+        elif keys[pygame.K_a] and self.input:
             self.direction.x = -1
             self.facing_right = False
         else:
             self.direction.x = 0
 
-        if keys[pygame.K_w] and keys[pygame.K_s]:
+        if keys[pygame.K_w] and keys[pygame.K_s] and self.input:
             pass
-        elif keys[pygame.K_w] and self.double_jump > 0 and self.single_w:
+        elif keys[pygame.K_w] and self.double_jump > 0 and self.single_w and self.input:
             self.jump()
             self.single_w = False
             self.double_jump = self.double_jump - 2
-        elif not keys[pygame.K_w]:
+        elif not keys[pygame.K_w] and self.input:
             self.single_w = True
-            if keys[pygame.K_s] and self.on_ground:
+            if keys[pygame.K_s] and self.on_ground and self.input:
                 self.want_crouch = True
             else:
                 self.want_crouch = False
@@ -203,7 +213,7 @@ class Player(pygame.sprite.Sprite):
     def shooting(self):
         # Shooting input + cooldown
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_e] and self.cooldown_bol:
+        if keys[pygame.K_e] and self.cooldown_bol and self.input:
             self.cooldown_frame = 0
             self.cooldown_bol = False
             return True
@@ -215,7 +225,10 @@ class Player(pygame.sprite.Sprite):
 
     def get_status(self):
         # Define the status for animations
-        if self.direction.y < 0:
+        if not self.is_alive:
+            self.status = "death"
+            self.input = False
+        elif self.direction.y < 0:
             self.status = "jump"
         elif self.direction.y > 1:
             self.status = "jump"
@@ -247,9 +260,6 @@ class Player(pygame.sprite.Sprite):
             self.get_input()
 
         self.get_status()
-        
-        if self.health <= 0:
-            self.is_alive = False
 
         if self.cooldown_bol:
             self.can_move = True
@@ -296,9 +306,11 @@ class Player_2(pygame.sprite.Sprite):
         self.on_right = False
         self.stop_index_jump = False
         self.stop_index_crouch = False
+        self.stop_index_death = False
         self.want_crouch = False
         self.health = 4
         self.is_alive = True
+        self.input = True
 
         # Player input
         self.single_w = True
@@ -308,7 +320,7 @@ class Player_2(pygame.sprite.Sprite):
         character_path = "game_files/characters/red/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
-        self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(240*screen_scale), int(240*screen_scale)]}
+        self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(175*screen_scale), int(170*screen_scale)]}
         self.sounds = {"walk":[]}
 
         for animation in self.animations.keys():
@@ -340,6 +352,14 @@ class Player_2(pygame.sprite.Sprite):
                     self.frame_index = 0
                 if int(self.frame_index) == len(self.animation) - 1:
                     self.stop_index_crouch = True
+
+        elif self.status == "death":
+            if self.stop_index_death == False:
+                self.frame_index += self.animation_speed
+                if self.frame_index >= len(self.animation):
+                    self.frame_index = 0
+                if int(self.frame_index) == len(self.animation) - 1:
+                    self.stop_index_death = True
 
         else:
             self.stop_index_crouch = False
@@ -389,26 +409,26 @@ class Player_2(pygame.sprite.Sprite):
         # Get inputs for movement
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_RIGHT] and keys[pygame.K_LEFT]:
+        if keys[pygame.K_RIGHT] and keys[pygame.K_LEFT] and self.input:
             self.direction.x = 0
-        elif keys[pygame.K_RIGHT]:
+        elif keys[pygame.K_RIGHT] and self.input:
             self.direction.x = 1
             self.facing_right = True
-        elif keys[pygame.K_LEFT]:
+        elif keys[pygame.K_LEFT] and self.input:
             self.direction.x = -1
             self.facing_right = False
         else:
             self.direction.x = 0
 
-        if keys[pygame.K_UP] and keys[pygame.K_DOWN]:
+        if keys[pygame.K_UP] and keys[pygame.K_DOWN] and self.input:
             pass
-        elif keys[pygame.K_UP] and self.double_jump > 0 and self.single_w:
+        elif keys[pygame.K_UP] and self.double_jump > 0 and self.single_w and self.input:
             self.jump()
             self.single_w = False
             self.double_jump = self.double_jump - 2
-        elif not keys[pygame.K_UP]:
+        elif not keys[pygame.K_UP] and self.input:
             self.single_w = True
-            if keys[pygame.K_DOWN] and self.on_ground:
+            if keys[pygame.K_DOWN] and self.on_ground and self.input:
                 self.want_crouch = True
             else:
                 self.want_crouch = False
@@ -454,7 +474,7 @@ class Player_2(pygame.sprite.Sprite):
     def shooting(self):
         # Shooting input + cooldown
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RCTRL] and self.cooldown_bol:
+        if keys[pygame.K_RCTRL] and self.cooldown_bol and self.input:
             self.cooldown_frame = 0
             self.cooldown_bol = False
             return True
@@ -466,7 +486,10 @@ class Player_2(pygame.sprite.Sprite):
     
     def get_status(self):
         # Define the status for animations
-        if self.direction.y < 0:
+        if not self.is_alive:
+            self.status = "death"
+            self.input = False
+        elif self.direction.y < 0:
             self.status = "jump"
         elif self.direction.y > 1:
             self.status = "jump"
@@ -478,6 +501,11 @@ class Player_2(pygame.sprite.Sprite):
                 self.status = "crouch"
             elif self.on_ground:
                 self.status = "idle"
+
+    def is_alive_func(self):
+        # Change the player death status
+        if self.health <= 0:
+            self.is_alive = False
 
     def apply_gravity(self):
         # G for player
@@ -493,12 +521,10 @@ class Player_2(pygame.sprite.Sprite):
             self.get_input()
 
         self.get_status()
-        
-        if self.health <= 0:
-            self.is_alive = False
 
         if self.cooldown_bol:
             self.can_move = True
   
         self.animate()
         self.get_bullet_pos()
+        self.is_alive_func()
