@@ -211,8 +211,8 @@ class Level:
         Player = self.Player.sprite
         Player_2 = self.Player_2.sprite
         
-        self.ui_cooldown_p1.update(Player.cooldown_frame / 43)
-        self.ui_cooldown_p2.update(Player_2.cooldown_frame / 43)
+        self.ui_cooldown_p1.update(1, int(Player.cooldown_frame * 0.066))
+        self.ui_cooldown_p2.update(2, int(Player_2.cooldown_frame * 0.066))
 
         self.ui_cooldown_p1.draw(self.display_surface)
         self.ui_cooldown_p2.draw(self.display_surface)

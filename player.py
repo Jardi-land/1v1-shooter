@@ -218,10 +218,11 @@ class Player(pygame.sprite.Sprite):
             self.cooldown_bol = False
             return True
         else:
-            self.cooldown_frame += 1
-            if self.cooldown_frame == 90:
-                self.cooldown_bol = True
-            return False
+            if not self.cooldown_frame == 90:
+                self.cooldown_frame += 1
+                if self.cooldown_frame == 90:
+                    self.cooldown_bol = True
+            return False 
 
     def get_status(self):
         # Define the status for animations
@@ -479,10 +480,11 @@ class Player_2(pygame.sprite.Sprite):
             self.cooldown_bol = False
             return True
         else:
-            self.cooldown_frame += 1
-            if self.cooldown_frame == 90:
-                self.cooldown_bol = True
-            return False
+            if not self.cooldown_frame == 90:
+                self.cooldown_frame += 1
+                if self.cooldown_frame == 90:
+                    self.cooldown_bol = True
+            return False 
     
     def get_status(self):
         # Define the status for animations
