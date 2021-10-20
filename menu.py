@@ -67,8 +67,8 @@ def main_menu() -> str:
     pygame.display.set_caption("Main menu")
     pygame.mouse.set_visible(True)
 
-    PLAY_BUTTON_PATH = 'game_files\buttons\play1.png'
-    PLAY_BUTTON_2ND_PATH = 'game_files\buttons\play2.png'
+    PLAY_BUTTON_PATH = 'game_files/buttons/play1.png'
+    PLAY_BUTTON_2ND_PATH = 'game_files/buttons/play2.png'
 
     info_text = txt(screen.get_width()/2, screen.get_height()/2, text="Appuie sur n'importe qu'elle touche")
     play_button = button(screen_res[0]/2, screen_res[1]/2, PLAY_BUTTON_PATH, PLAY_BUTTON_2ND_PATH)
