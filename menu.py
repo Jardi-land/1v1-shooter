@@ -75,7 +75,9 @@ def main_menu() -> str:
     while True:
         mouse = pygame.mouse.get_pos()
 
-        screen.fill((0,0,0))
+        bg_surf = pygame.transform.scale(pygame.image.load("game_files/background/main_menu.png").convert_alpha(), (int(1920*screen_scale), int(1080*screen_scale)))
+        screen.blit(bg_surf,(0,0))
+
         play_button.draw(screen)
 
         if play_button.switch_image(mouse):
