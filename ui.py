@@ -27,10 +27,10 @@ class cooldown_ui(pygame.sprite.Sprite):
         super().__init__()
         if player == 1:
             self.image = pygame.transform.scale(pygame.image.load("game_files/ui/cooldown/cooldown_ui43.png").convert_alpha(), (int(385*screen_scale), int(120*screen_scale)))
-            self.rect = self.image.get_rect(topleft = (int(27 * screen_scale), int(7 * scren_scale)))
+            self.rect = self.image.get_rect(topleft = (int(27 * screen_scale), int(7 * screen_scale)))
         else:
             self.image = pygame.transform.flip(pygame.transform.scale(pygame.image.load("game_files/ui/cooldown/cooldown_ui43.png").convert_alpha(), (int(385*screen_scale), int(120*screen_scale))),True,False)
-            self.rect = self.image.get_rect(topright = (screen_res[0] - int(27 * screen_scale), int(7 * scren_scale)))
+            self.rect = self.image.get_rect(topright = (screen_res[0] - int(27 * screen_scale), int(7 * screen_scale)))
 
         self.ui_path = "game_files/ui/cooldown"
         
