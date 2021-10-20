@@ -1,4 +1,3 @@
-from _typeshed import Self, SupportsReadline
 import sys, pygame
 from setting import *
 import random as rd
