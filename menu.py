@@ -54,13 +54,13 @@ class button:
         return False
 
     def switch_image(self, pos):
-        if self.alternate_image != None:
-            if self.is_Over(pos):
+        if self.is_Over(pos):
+            if self.alternate_image != None:
                 self.image = self.alternate_image
-                return True
-            else:
-                self.image = self.default_image
-                return False
+            return True
+        else:
+            self.image = self.default_image
+            return False
 
 def main_menu() -> str:
     screen = pygame.display.set_mode(screen_res)
@@ -70,13 +70,12 @@ def main_menu() -> str:
     PLAY_BUTTON_PATH = 'game_files/buttons/play1.png'
     PLAY_BUTTON_2ND_PATH = 'game_files/buttons/play2.png'
 
-    info_text = txt(screen.get_width()/2, screen.get_height()/2, text="Appuie sur n'importe qu'elle touche")
     play_button = button(screen_res[0]/2, screen_res[1]/2, PLAY_BUTTON_PATH, PLAY_BUTTON_2ND_PATH)
 
     while True:
         mouse = pygame.mouse.get_pos()
+
         screen.fill((0,0,0))
-        info_text.draw(screen)
         play_button.draw(screen)
 
         if play_button.switch_image(mouse):
@@ -88,7 +87,5 @@ def main_menu() -> str:
                 pygame.quit()
                 exit()
             
-            if event.type == pygame.KEYDOWN:
-                return 'play'
         
         pygame.display.update()
