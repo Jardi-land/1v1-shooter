@@ -27,8 +27,16 @@ class Level:
         # Ui
         self.ui_p1 = pygame.sprite.Group()
         self.ui_p2 = pygame.sprite.Group()
+
+        self.ui_cooldown_p1 = pygame.sprite.Group()
+        self.ui_cooldown_p2 = pygame.sprite.Group()
+
         self.ui_p1.add(ui(1))
         self.ui_p2.add(ui(2))
+
+        self.ui_cooldown_p1.add(cooldown_ui(1))
+        self.ui_cooldown_p2.add(cooldown_ui(2))
+
         self.ui_p1.add(cooldown_ui(1))
         self.ui_p2.add(cooldown_ui(2))
 
@@ -199,6 +207,16 @@ class Level:
                     Player.health -= bullet.damage
                     self.ui_p1.update(1, Player.health)
 
+    def ui_cooldown(self):
+        Player = self.Player.sprite
+        Player_2 = self.Player_2.sprite
+        
+        self.ui_cooldown_p1.update(Player.cooldown_frame / 43)
+        self.ui_cooldown_p2.update(Player_2.cooldown_frame / 43)
+
+        self.ui_cooldown_p1.draw(self.display_surface)
+        self.ui_cooldown_p2.draw(self.display_surface)
+
     def ui(self):
         self.ui_p1.draw(self.display_surface)
         self.ui_p2.draw(self.display_surface)
@@ -228,6 +246,7 @@ class Level:
 
         # Ui
         self.ui()
-
+        self.ui_cooldown()
+        
         #pw
         self.pwup.draw(self.display_surface)
