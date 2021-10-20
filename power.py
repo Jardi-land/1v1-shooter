@@ -1,4 +1,3 @@
-from _typeshed import Self, SupportsReadline
 import sys, pygame
 from setting import *
 import random as rd
@@ -19,7 +18,7 @@ class PowerUp:
         while len(pos) < 2:
             y = rd.randint(0, len(firstmap))
             x = rd.randint(0, len(firstmap[0]))
-            if firstmap[x][y] != ' ':
+            if firstmap[x][y] != 'PW':
                 continue
             else:
                 pos.append(x)

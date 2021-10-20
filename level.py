@@ -8,6 +8,7 @@ from tiles import Tiles
 from player import Player, Player_2
 from bullet import Bullet, Muzzle_flash
 from ui import ui, cooldown_ui
+from power import PowerUp
 
 class Level:
     def __init__(self,level_data,surface):
@@ -35,6 +36,12 @@ class Level:
 
         self.ui_cooldown_p1.add(cooldown_ui(1))
         self.ui_cooldown_p2.add(cooldown_ui(2))
+
+        self.ui_p1.add(cooldown_ui(1))
+        self.ui_p2.add(cooldown_ui(2))
+
+        #power up test
+        self.pwup = PowerUp()
         
 
     def setup_level(self,layout):
@@ -240,3 +247,6 @@ class Level:
         # Ui
         self.ui()
         self.ui_cooldown()
+        
+        #pw
+        self.pwup.draw(self.display_surface)
