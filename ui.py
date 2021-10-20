@@ -18,9 +18,9 @@ class ui(pygame.sprite.Sprite):
 
     def update(self, player, health):
         if player == 1:
-            self.image = self.ui_list[health].convert_alpha()
+            self.image = self.ui_list[health]
         else:
-            self.image = pygame.transform.flip(self.ui_list[health],True,False).convert_alpha()
+            self.image = pygame.transform.flip(self.ui_list[health],True,False)
 
 class cooldown_ui(pygame.sprite.Sprite):
     def __init__(self,player):
@@ -38,6 +38,6 @@ class cooldown_ui(pygame.sprite.Sprite):
     
     def update(self,player,frame):
         if player == 1:
-            self.image = self.ui_list[frame]#.convert_alpha()
+            self.image = self.ui_list[frame]#on load les image et on les convert_alpha() direct c plus opti
         else:
-            self.image = pygame.transform.flip(self.ui_list[frame],True,False).convert_alpha()
+            self.image = pygame.transform.flip(self.ui_list[frame],True,False)
