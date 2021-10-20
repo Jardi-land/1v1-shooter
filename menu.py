@@ -70,13 +70,14 @@ def main_menu() -> str:
     PLAY_BUTTON_PATH = 'game_files/buttons/play1.png'
     PLAY_BUTTON_2ND_PATH = 'game_files/buttons/play2.png'
 
+    BG_SURF = pygame.transform.scale(pygame.image.load("game_files/background/main_menu.png").convert_alpha(), (int(1920*screen_scale), int(1080*screen_scale)))
+
     play_button = button(screen_res[0]/2, screen_res[1]/2, PLAY_BUTTON_PATH, PLAY_BUTTON_2ND_PATH)
 
     while True:
         mouse = pygame.mouse.get_pos()
-
-        bg_surf = pygame.transform.scale(pygame.image.load("game_files/background/main_menu.png").convert_alpha(), (int(1920*screen_scale), int(1080*screen_scale)))
-        screen.blit(bg_surf,(0,0))
+        
+        screen.blit(BG_SURF,(0,0))
 
         play_button.draw(screen)
 
