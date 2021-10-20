@@ -34,19 +34,54 @@ class txt:
 
 """"""
 
+class button:
+    def __init__(self, x, y, image_path, alternate_img=None) -> None:
+        self.image = pygame.image.load(image_path).convert_alpha()
+
+        self.size = pygame.math.Vector2(self.image.get_width(), self.image.get_height())
+        self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
+
+        self.alternate_image = pygame.transorm.scale(pygame.image.load(alternate_img).convert_alpha(), self.size) if alternate_img != None else None
+        self.default_image = self.image
+
+    def draw(self, win):
+        win.blit(self.image, self.pos)
+
+    def is_Over(self, pos):
+        if self.pos.x < pos[0] and self.pos.x + self.size.x > pos[0]:
+            if self.pos.y < pos[1] and self.pos.y + self.size.y > pos[1]:
+                return True
+        return False
+
+    def switch_image(self, pos):
+        if self.alternate_image != None:
+            if self.is_Over(pos):
+                self.image = self.alternate_image
+                return True
+            else:
+                self.image = self.default_image
+                return False
 
 def main_menu() -> str:
     screen = pygame.display.set_mode(screen_res)
     pygame.display.set_caption("Main menu")
     pygame.mouse.set_visible(True)
 
+    PLAY_BUTTON_PATH = 'game_files\buttons\play1.png'
+    PLAY_BUTTON_2ND_PATH = 'game_files\buttons\play2.png'
+
     info_text = txt(screen.get_width()/2, screen.get_height()/2, text="Appuie sur n'importe qu'elle touche")
-    important_info = txt(screen.get_width()/2, screen.get_height()/2 + 50, text="")
+    play_button = button(screen_res[0]/2, screen_res[1]/2, PLAY_BUTTON_PATH, PLAY_BUTTON_2ND_PATH)
 
     while True:
+        mouse = pygame.mouse.get_pos()
         screen.fill((0,0,0))
         info_text.draw(screen)
-        important_info.draw(screen)
+        play_button.draw(screen)
+
+        if play_button.switch_image(mouse):
+            if pygame.mouse.get_pressed()[0]:
+                return 'play'
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
