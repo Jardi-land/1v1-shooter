@@ -19,7 +19,7 @@ class PowerUp:
         while len(pos) < 2:
             y = rd.randint(0, len(firstmap))
             x = rd.randint(0, len(firstmap[0]))
-            if firstmap[x][y] != ' ':
+            if firstmap[x][y] != 'PW':
                 continue
             else:
                 pos.append(x)
