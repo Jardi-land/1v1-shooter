@@ -36,7 +36,7 @@ class txt:
 
 class button:
     def __init__(self, x, y, image_path, alternate_img=None) -> None:
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (int(601*screen_scale), int(177*screen_scale)))
 
         self.size = pygame.math.Vector2(self.image.get_width(), self.image.get_height())
         self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
