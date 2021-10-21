@@ -35,8 +35,10 @@ class txt:
 """"""
 
 class button:
-    def __init__(self, x, y, image_path, alternate_img=None) -> None:
-        self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (int(601*screen_scale), int(177*screen_scale)))
+    def __init__(self, x, y, transx, transy, image_path, alternate_img=None) -> None: 
+        # NO *SCREEN_SCALE WHEN YOU  !! CALL !! BUTTON exemple: button(0, 0, 10, 20, "/d.png")
+        # Donc si tu veux utiliser button() pour transx et transy tu met les valeur par defaut pour 1920x1080
+        self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (int(transx*screen_scale), int(transy*screen_scale)))
 
         self.size = pygame.math.Vector2(self.image.get_width(), self.image.get_height())
         self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
@@ -72,7 +74,7 @@ def main_menu() -> str:
 
     BG_SURF = pygame.transform.scale(pygame.image.load("game_files/background/main_menu.png").convert_alpha(), (int(1920*screen_scale), int(1080*screen_scale)))
 
-    play_button = button(screen_res[0]/2, screen_res[1]/2, PLAY_BUTTON_PATH, PLAY_BUTTON_2ND_PATH)
+    play_button = button(screen_res[0]/2, screen_res[1]/2, 601, 177, PLAY_BUTTON_PATH, PLAY_BUTTON_2ND_PATH)
 
     while True:
         mouse = pygame.mouse.get_pos()
