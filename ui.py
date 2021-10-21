@@ -41,3 +41,16 @@ class cooldown_ui(pygame.sprite.Sprite):
             self.image = self.ui_list[frame]#on load les image et on les convert_alpha() direct c plus opti
         else:
             self.image = pygame.transform.flip(self.ui_list[frame],True,False)
+
+class mugshot(pygame.sprite.Sprite):
+    def __init__(self,player,color):
+        super().__init__()
+
+        full_path = "game_files/characters/" + color + "/mug_shot/Gunner_mugshot.png"
+
+        if player == 1:
+            self.image = pygame.transform.scale(pygame.image.load(full_path).convert_alpha(), (int(110*screen_scale), int(100*screen_scale)))
+            self.rect = self.image.get_rect(topleft = (int(10*screen_scale), int(10*screen_scale)))
+        else:
+            self.image = pygame.transform.flip(pygame.transform.scale(pygame.image.load(full_path).convert_alpha(), (int(110*screen_scale), int(100*screen_scale))),True,False)
+            self.rect = self.image.get_rect(topright = (screen_res[0] - int(10*screen_scale), int(10*screen_scale)))

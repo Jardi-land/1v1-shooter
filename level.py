@@ -7,7 +7,7 @@ from settings import *
 from tiles import Tiles
 from player import Player, Player_2
 from bullet import Bullet, Muzzle_flash
-from ui import ui, cooldown_ui
+from ui import ui, cooldown_ui, mugshot
 from power import PowerUp
 
 class Level:
@@ -31,14 +31,17 @@ class Level:
         self.ui_cooldown_p1 = pygame.sprite.Group()
         self.ui_cooldown_p2 = pygame.sprite.Group()
 
+        self.mugshot_p1 = pygame.sprite.Group()
+        self.mugshot_p2 = pygame.sprite.Group()
+
         self.ui_p1.add(ui(1))
         self.ui_p2.add(ui(2))
 
         self.ui_cooldown_p1.add(cooldown_ui(1))
         self.ui_cooldown_p2.add(cooldown_ui(2))
 
-        self.ui_p1.add(cooldown_ui(1))
-        self.ui_p2.add(cooldown_ui(2))
+        self.mugshot_p1.add(mugshot(1, "green"))
+        self.mugshot_p2.add(mugshot(2, "red"))
 
         #power up test
         self.pwup = PowerUp()
@@ -221,6 +224,10 @@ class Level:
         self.ui_p1.draw(self.display_surface)
         self.ui_p2.draw(self.display_surface)
 
+    def mugshot(self):
+        self.mugshot_p1.draw(self.display_surface)
+        self.mugshot_p2.draw(self.display_surface)
+
     def power_up_update(self):
         Player = self.Player.sprite
         Player_2 = self.Player_2.sprite
@@ -263,6 +270,7 @@ class Level:
         # Ui
         self.ui()
         self.ui_cooldown()
+        self.mugshot()
         
         #pw
         self.power_up_update()
