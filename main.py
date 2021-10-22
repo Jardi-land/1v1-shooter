@@ -7,7 +7,7 @@ from level import *
 from player import *
 from settings import *
 from tiles import Tiles
-from menu import main_menu
+from menu import main_menu, choose_char_menu
 
 pygame.init()
 def main():
@@ -38,4 +38,8 @@ def main():
 if __name__ == '__main__':
     action = main_menu()#comme elle n'est appele qu'une fois 
     if action == 'play':#et on check seulement ce qu'elle retourne
-        main()
+        player_1 = choose_char_menu(None)
+        if player_1:
+            player_2 = choose_char_menu(player_1)
+            if player_2:
+                main()

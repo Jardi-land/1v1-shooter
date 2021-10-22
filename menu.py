@@ -94,3 +94,92 @@ def main_menu() -> str:
             
         
         pygame.display.update()
+
+def choose_char_menu(lock) -> str:
+    screen = pygame.display.set_mode(screen_res)
+    pygame.display.set_caption("Choose your character")
+    pygame.mouse.set_visible(True)
+
+    double_check = True
+
+    all_button = {"black":[], "green":[], "red":[], "blue":[], "yellow":[]}
+    
+    for value in all_button.keys():
+        all_button[value] = [f"game_files/buttons/char_button/{value}/{value}_button1.png", f"game_files/buttons/char_button/{value}/{value}_button2.png"]
+
+    BG_SURF = pygame.transform.scale(pygame.image.load("game_files/background/main_menu.png").convert_alpha(), (int(1920*screen_scale), int(1080*screen_scale)))
+
+    CHOOSE_YOUR = pygame.transform.scale(pygame.image.load("game_files/font/font_img/choose_your.png").convert_alpha(), (int(862*screen_scale), int(88.5*screen_scale)))
+
+    COLOR = pygame.transform.scale(pygame.image.load("game_files/font/font_img/color.png").convert_alpha(), (int(396.5*screen_scale), int(88.5*screen_scale)))
+
+    LOCKER = pygame.transform.scale(pygame.image.load("game_files/buttons/char_button/lock/lock_button.png").convert_alpha(), (int(110*screen_scale), int(100*screen_scale)))
+
+    yellow_button = button(1245*screen_scale, screen_res[1]/1.75, 110, 100, all_button["yellow"][0], all_button["yellow"][1])
+    blue_button = button(1100*screen_scale, screen_res[1]/1.75, 110, 100, all_button["blue"][0], all_button["blue"][1])
+    red_button = button(955*screen_scale, screen_res[1]/1.75, 110, 100, all_button["red"][0], all_button["red"][1])
+    black_button = button(810*screen_scale, screen_res[1]/1.75, 110, 100, all_button["black"][0], all_button["black"][1])
+    green_button = button(660*screen_scale, screen_res[1]/1.75, 110, 100, all_button["green"][0], all_button["green"][1])
+
+    while True:
+        if double_check:
+            if not pygame.mouse.get_pressed()[0]:
+                double_check = False
+
+        mouse = pygame.mouse.get_pos()
+
+        screen.blit(BG_SURF,(0,0))
+
+        screen.blit(CHOOSE_YOUR,(screen_res[0]/2 - CHOOSE_YOUR.get_width()/2, screen_res[1]/2 - CHOOSE_YOUR.get_height()*2.4))
+
+        screen.blit(COLOR,(screen_res[0]/2 - COLOR.get_width()/2, screen_res[1]/2 - COLOR.get_height()*1.2))
+
+        yellow_button.draw(screen)
+        blue_button.draw(screen)
+        red_button.draw(screen)
+        black_button.draw(screen)
+        green_button.draw(screen)
+
+        if not double_check:
+            if lock == "yellow":
+                screen.blit(LOCKER,(1245*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
+            else:
+                if yellow_button.switch_image(mouse):
+                    if pygame.mouse.get_pressed()[0]:
+                        return 'yellow'
+
+            if lock == "blue":
+                screen.blit(LOCKER,(1100*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
+            else:
+                if blue_button.switch_image(mouse):
+                    if pygame.mouse.get_pressed()[0]:
+                        return 'blue'
+            
+            if lock == "red":
+                screen.blit(LOCKER,(955*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
+            else:
+                if red_button.switch_image(mouse):
+                    if pygame.mouse.get_pressed()[0]:
+                        return 'red'
+
+            if lock == "black":
+                screen.blit(LOCKER,(810*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
+            else:
+                if black_button.switch_image(mouse):
+                    if pygame.mouse.get_pressed()[0]:
+                        return 'black'
+
+            if lock == "green":
+                screen.blit(LOCKER,(660*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
+            else:
+                if green_button.switch_image(mouse):
+                    if pygame.mouse.get_pressed()[0]:
+                        return 'green'
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            
+        
+        pygame.display.update()
