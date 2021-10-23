@@ -44,7 +44,7 @@ class Level:
         self.mugshot_p2.add(mugshot(2, player_2))
 
         #power up test
-        self.pwup = PowerUp()
+        self.pwup = PowerUp(5)
         
 
     def setup_level(self,layout,player_1, player_2):
@@ -233,15 +233,17 @@ class Level:
         Player_2 = self.Player_2.sprite
         self.pwup.draw(self.display_surface)
         
-        if Player.rect.colliderect(self.pwup.rect):
-            self.pwup.pick_new_spot()
-            Player.health = Player.max_health
-            self.ui_p1.update(1, Player.health)
+        if self.pwup.has_spawned:
+            if Player.rect.colliderect(self.pwup.rect):
+                self.pwup.Reset()
+                Player.health = Player.max_health
+                self.ui_p1.update(1, Player.health)
 
-        elif Player_2.rect.colliderect(self.pwup.rect):
-            self.pwup.pick_new_spot()
-            Player_2.health = Player_2.max_health
-            self.ui_p2.update(2, Player_2.health)
+            elif Player_2.rect.colliderect(self.pwup.rect):
+                self.pwup.Reset()
+                Player_2.health = Player_2.max_health
+                self.ui_p2.update(2, Player_2.health)
+                
 
 
     def draw(self):

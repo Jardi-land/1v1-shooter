@@ -33,7 +33,7 @@ def main(player_1, player_2):
         level.draw()
 
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(DEFAULT_FPS)
 
 if __name__ == '__main__':
     action = main_menu()#comme elle n'est appele qu'une fois 

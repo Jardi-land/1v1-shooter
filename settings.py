@@ -3,6 +3,7 @@ screen_res = screen_res_array["hd"]
 screen_scale = screen_res[0]/1920
 window_name = "Gunner 1vs1"
 mouse_visible = False
+DEFAULT_FPS = 60
 
 # " " = nothing
 # "X" = Platform
