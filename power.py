@@ -7,7 +7,7 @@ from support import import_folder
 #####################################################################################
 ###############     W. I. P.
 #####################################################################################
-
+"""on pourra changer les pouvoir plus tard ^^"""
 class PowerUp:
     def __init__(self, respawn_cooldown_seconds):
         self.size = pygame.math.Vector2(int(100*screen_scale), int(100*screen_scale))
