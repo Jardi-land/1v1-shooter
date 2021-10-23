@@ -33,6 +33,7 @@ class PowerUp:
     def Reset(self):
         self.has_spawned = False
         self.pick_new_spot()
+        self.image = self.posible_images[self.pow_img_index]
         self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
 
     def update(self):
@@ -53,7 +54,6 @@ class PowerUp:
         pos = self.posible_pos[rd.randint(0, len(self.posible_pos)-1)]
         p = pygame.math.Vector2(int((screen_res[0]/len(firstmap[pos[1]]))*pos[0]), int((screen_res[1]/len(firstmap))*pos[1]))
         index = rd.randint(0, len(self.posible_images)-1)
-        print('index: ', index)
         return p, index
 
     def pick_new_spot(self):
