@@ -8,16 +8,18 @@ from support import import_folder
 ###############     W. I. P.
 #####################################################################################
 """on pourra changer les pouvoir plus tard ^^"""
-class PowerUp:
+class PowerUp(pygame.sprite.Sprite):
     def __init__(self, respawn_cooldown_seconds):
+        super().__init__()
+        
         self.size = pygame.math.Vector2(int(100*screen_scale), int(100*screen_scale))
         self.posible_images = import_folder('game_files/power_ups', self.size.x, self.size.y)
         print(len(self.posible_images), self.posible_images)
 
         self.posible_pos = self.sort_power_spots(firstmap)
-        self.pos, self.pow_img_index = self.pick_spot()
+        self.pos, self.power_type = self.pick_spot()
 
-        self.image = self.posible_images[self.pow_img_index]
+        self.image = self.posible_images[self.power_type]
         self.rect = self.image.get_rect(topleft=self.pos)
         
         self.has_spawned = False
@@ -33,7 +35,7 @@ class PowerUp:
     def Reset(self):
         self.has_spawned = False
         self.pick_new_spot()
-        self.image = self.posible_images[self.pow_img_index]
+        self.image = self.posible_images[self.power_type]
         self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
 
     def update(self):
@@ -63,5 +65,5 @@ class PowerUp:
         else:
             self.pos = new
             self.rect.x, self.rect.y = new.x, new.y
-            self.pow_img_index = new_pwr
+            self.power_type = new_pwr
         
