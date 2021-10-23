@@ -10,7 +10,7 @@ from tiles import Tiles
 from menu import main_menu, choose_char_menu
 
 pygame.init()
-def main():
+def main(player_1, player_2):
 
     screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
     pygame.display.set_caption(window_name)
@@ -21,7 +21,7 @@ def main():
     bg_surf.fill((118, 120, 134, 255))
 
 
-    level = Level(firstmap, screen)
+    level = Level(firstmap, screen, player_1, player_2)
 
     while True:
         for event in pygame.event.get():
@@ -42,4 +42,4 @@ if __name__ == '__main__':
         if player_1:
             player_2 = choose_char_menu(player_1)
             if player_2:
-                main()
+                main(player_1, player_2)

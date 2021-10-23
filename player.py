@@ -9,9 +9,9 @@ from support import import_folder
 from mixer_sounds import import_sounds
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,pos):
+    def __init__(self,pos, player_color):
         super().__init__()
-        self.import_character_assets()
+        self.import_character_assets(player_color)
 
         # Animations
         self.frame_index = 0
@@ -55,9 +55,9 @@ class Player(pygame.sprite.Sprite):
         # Player input
         self.single_w = True
 
-    def import_character_assets(self):
+    def import_character_assets(self,player_color):
         # Import all char. frames (and sounds)
-        character_path = "game_files/characters/green/"
+        character_path = f"game_files/characters/{player_color}/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
         self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(175*screen_scale), int(170*screen_scale)]}
@@ -272,9 +272,9 @@ class Player(pygame.sprite.Sprite):
 
 
 class Player_2(pygame.sprite.Sprite):
-    def __init__(self,pos):
+    def __init__(self,pos, player_color):
         super().__init__()
-        self.import_character_assets()
+        self.import_character_assets(player_color)
 
         # Animations
         self.frame_index = 0
@@ -318,9 +318,9 @@ class Player_2(pygame.sprite.Sprite):
         # Player input
         self.single_w = True
 
-    def import_character_assets(self):
+    def import_character_assets(self, player_color):
         # Import all char. frames (and sounds)
-        character_path = "game_files/characters/red/"
+        character_path = f"game_files/characters/{player_color}/"
         sound_path = "game_files/sounds/"
         self.animations = {"idle":[],"run":[],"jump":[],"crouch":[],"death":[]}
         self.animations_scale = {"idle":[int(140*screen_scale), int(165*screen_scale)],"run":[int(140*screen_scale), int(180*screen_scale)],"jump":[int(140*screen_scale), int(170*screen_scale)],"crouch":[int(140*screen_scale), int(170*screen_scale)],"death":[int(175*screen_scale), int(170*screen_scale)]}

@@ -11,10 +11,10 @@ from ui import ui, cooldown_ui, mugshot
 from power import PowerUp
 
 class Level:
-    def __init__(self,level_data,surface):
+    def __init__(self,level_data,surface,player_1, player_2):
         # The Map
         self.display_surface = surface
-        self.setup_level(level_data)
+        self.setup_level(level_data,player_1, player_2)
         self.world_shift = 0
         self.current_x = 0
 
@@ -40,14 +40,14 @@ class Level:
         self.ui_cooldown_p1.add(cooldown_ui(1))
         self.ui_cooldown_p2.add(cooldown_ui(2))
 
-        self.mugshot_p1.add(mugshot(1, "green"))
-        self.mugshot_p2.add(mugshot(2, "red"))
+        self.mugshot_p1.add(mugshot(1, player_1))
+        self.mugshot_p2.add(mugshot(2, player_2))
 
         #power up test
         self.pwup = PowerUp()
         
 
-    def setup_level(self,layout):
+    def setup_level(self,layout,player_1, player_2):
         # Sprite(s) groups
         self.Tiles = pygame.sprite.Group()
         self.Player = pygame.sprite.GroupSingle()
@@ -77,10 +77,10 @@ class Level:
                     Tile = Tiles((platform_x,platform_y),0)
                     self.Tiles.add(Tile)
                 elif layout[line_i][11-i] == "P":
-                    player_sprite = Player((platform_x,platform_y))
+                    player_sprite = Player((platform_x,platform_y), player_1)
                     self.Player.add(player_sprite)
                 elif layout[line_i][11-i] == "P2":
-                    player_2_sprite = Player_2((platform_x,platform_y))
+                    player_2_sprite = Player_2((platform_x,platform_y), player_2)
                     self.Player_2.add(player_2_sprite)
 
     def horizontal_movement_collision(self):
