@@ -44,7 +44,7 @@ class Level:
         self.mugshot_p2.add(mugshot(2, player_2))
 
         #power up test
-        self.pwup = PowerUp(5)
+        self.pwup = PowerUp(10)
         
 
     def setup_level(self,layout,player_1, player_2):
@@ -245,7 +245,7 @@ class Level:
                         Player.health = Player.max_health
                         self.ui_p1.update(1, Player.health)
                     case 1:
-                        Player.cooldown_frame = 90
+                        Player.cooldown_frame = 85
                         self.ui_cooldown_p1.update(1, 0)
                 self.pwup.Reset()
 
@@ -255,7 +255,7 @@ class Level:
                         Player_2.health = Player_2.max_health
                         self.ui_p2.update(2, Player_2.health)
                     case 1:
-                        Player_2.cooldown_frame = 90
+                        Player_2.cooldown_frame = 85
                         self.ui_cooldown_p2.update(2, 0)
                 self.pwup.Reset()
                 
