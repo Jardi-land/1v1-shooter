@@ -1,12 +1,10 @@
 import sys, pygame
+from pygame import key
 from settings import *
 import random as rd
 from menu import txt
 from support import import_folder
 
-#####################################################################################
-###############     W. I. P.
-#####################################################################################
 """on pourra changer les pouvoir plus tard ^^"""
 class PowerUp(pygame.sprite.Sprite):
     def __init__(self, respawn_cooldown_seconds):
@@ -39,9 +37,21 @@ class PowerUp(pygame.sprite.Sprite):
         self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
 
     def update(self):
+        #for testing
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_h]:
+            self.force_heal()
+        elif keys[pygame.K_g]:
+            self.force_ammo()
+        elif keys[pygame.K_j]:
+            self.timer = 10
+        ######################
+
         self.timer -= 1
         if self.timer < 0:
             self.has_spawned = True
+        
 
     def sort_power_spots(self, map):
         f = []
@@ -66,4 +76,17 @@ class PowerUp(pygame.sprite.Sprite):
             self.pos = new
             self.rect.x, self.rect.y = new.x, new.y
             self.power_type = new_pwr
-        
+
+    ####################################
+    ## FOR TESTING ONLY
+    ####################################
+
+    def force_heal(self):
+        self.Reset()
+        self.power_type = 0
+        self.image = self.posible_images[self.power_type]
+
+    def force_ammo(self):
+        self.Reset()
+        self.power_type = 1
+        self.image = self.posible_images[self.power_type]

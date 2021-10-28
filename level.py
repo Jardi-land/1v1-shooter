@@ -5,7 +5,7 @@ Creator: @Lorenzo_De_ZEN
 import sys, pygame
 from settings import *
 from tiles import Tiles
-from player import Player, Player_2
+from experimental_player import Player, Player_2
 from bullet import Bullet, Muzzle_flash
 from ui import ui, cooldown_ui, mugshot
 from power import PowerUp

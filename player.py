@@ -55,6 +55,9 @@ class Player(pygame.sprite.Sprite):
         # Player input
         self.single_w = True
 
+        #Shadows
+        self.shadow_img = pygame.image.load('assets/EXTRAS/Shadow.png')
+
     def import_character_assets(self,player_color):
         # Import all char. frames (and sounds)
         character_path = f"game_files/characters/{player_color}/"

@@ -7,7 +7,6 @@ class txt:
         """
         Simple text class. pos_mode = 0 draw text from the center and 1 from the top left.
         the class is made so that the x & y values of the topleft corner never go below 0.
-        (je l'ai faite ^^)
         """
         newy = 0
         if y < font_size * .5 and pos_mode == 0:
