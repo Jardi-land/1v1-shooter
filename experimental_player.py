@@ -61,6 +61,10 @@ class Player_template(pygame.sprite.Sprite):
         # Player input
         self.single_w = True
 
+        #Shadows
+        self.shadow_img = pygame.image.load('assets/EXTRAS/Shadow.png')
+        self.shadow_img = pygame.transform.scale(self.shadow_img, (self.rect.width, self.shadow_img.height))
+
     
     def import_character_assets(self,player_color):
         # Import all char. frames (and sounds)
@@ -277,6 +281,10 @@ class Player_template(pygame.sprite.Sprite):
         self.get_bullet_pos()
         self.is_alive_func()
 
+    def draw_shadows(self, win):
+        if self.on_ground:
+            win.blit(self.shadow_img, (self.rect.bottom, self.rect.left))
+
 class Player(Player_template):
     def __init__(self,pos, player_color):
         super().__init__(pos, player_color, 1)
@@ -286,6 +294,7 @@ class Player(Player_template):
 
     def shooting(self):
         return super().shoot(pygame.K_e)
+
 
 class Player_2(Player_template):
     def __init__(self,pos, player_color):
