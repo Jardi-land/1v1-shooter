@@ -240,23 +240,21 @@ class Level:
                 C'est la meme chose que "switch ... case ...
                 !! NE MARCHE QUE AVEC PYTHON 3.10 ET + !!
                 """
-                match self.pwup.power_type:
-                    case 0:
-                        Player.health = Player.max_health
-                        self.ui_p1.update(1, Player.health)
-                    case 1:
-                        Player.cooldown_frame = 85
-                        self.ui_cooldown_p1.update(1, 0)
+                if self.pwup.power_type == 0:
+                    Player.health = Player.max_health
+                    self.ui_p1.update(1, Player.health)
+                elif self.pwup.power_type == 1:
+                    Player.cooldown_frame = 85
+                    self.ui_cooldown_p1.update(1, 0)
                 self.pwup.Reset()
 
             elif Player_2.rect.colliderect(self.pwup.rect):
-                match self.pwup.power_type:
-                    case 0:
-                        Player_2.health = Player_2.max_health
-                        self.ui_p2.update(2, Player_2.health)
-                    case 1:
-                        Player_2.cooldown_frame = 85
-                        self.ui_cooldown_p2.update(2, 0)
+                if self.pwup.power_type == 0:
+                    Player_2.health = Player_2.max_health
+                    self.ui_p2.update(2, Player_2.health)
+                elif self.pwup.power_type == 1:
+                    Player_2.cooldown_frame = 85
+                    self.ui_cooldown_p2.update(2, 0)
                 self.pwup.Reset()
                 
 
