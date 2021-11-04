@@ -62,8 +62,7 @@ class Player_template(pygame.sprite.Sprite):
         self.single_w = True
 
         #Shadows
-        self.shadow_img = pygame.image.load('assets/EXTRAS/Shadow.png')
-        self.shadow_img = pygame.transform.scale(self.shadow_img, (self.rect.width, self.shadow_img.height))
+        self.shadow_img = pygame.transform.scale(pygame.image.load('assets/EXTRAS/Shadow.png'), (self.rect.width, self.rect.height * .25))
 
     
     def import_character_assets(self,player_color):
@@ -283,7 +282,7 @@ class Player_template(pygame.sprite.Sprite):
 
     def draw_shadows(self, win):
         if self.on_ground:
-            win.blit(self.shadow_img, (self.rect.bottom, self.rect.left))
+            win.blit(self.shadow_img, (self.rect.left, self.rect.bottom - (25 * screen_scale)))
 
 class Player(Player_template):
     def __init__(self,pos, player_color):
