@@ -5,7 +5,7 @@ Creator: @Lorenzo_De_ZEN
 import sys, pygame
 from settings import *
 from tiles import Tiles
-from experimental_player import Player, Player_2
+from player import Player
 from bullet import Bullet, Muzzle_flash
 from ui import ui, cooldown_ui, mugshot
 from power import PowerUp
@@ -77,10 +77,10 @@ class Level:
                     Tile = Tiles((platform_x,platform_y),0)
                     self.Tiles.add(Tile)
                 elif layout[line_i][11-i] == "P":
-                    player_sprite = Player((platform_x,platform_y), player_1)
+                    player_sprite = Player((platform_x,platform_y), player_1, 1)
                     self.Player.add(player_sprite)
                 elif layout[line_i][11-i] == "P2":
-                    player_2_sprite = Player_2((platform_x,platform_y), player_2)
+                    player_2_sprite = Player((platform_x,platform_y), player_2, 2)
                     self.Player_2.add(player_2_sprite)
 
     def horizontal_movement_collision(self):
