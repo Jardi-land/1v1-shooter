@@ -36,10 +36,7 @@ def main(player_1, player_2):
         clock.tick(DEFAULT_FPS)
 
 if __name__ == '__main__':
-    action = main_menu()#comme elle n'est appele qu'une fois 
-    if action == 'play':#et on check seulement ce qu'elle retourne
-        player_1 = choose_char_menu(None)
-        if player_1:
-            player_2 = choose_char_menu(player_1)
-            if player_2:
-                main(player_1, player_2)
+    action = main_menu()
+    if action == 'play':
+        player_1, player_2 = choose_char_menu()
+        main(player_1, player_2)

@@ -38,14 +38,17 @@ class PowerUp(pygame.sprite.Sprite):
 
     def update(self):
         #for testing
-        keys = pygame.key.get_pressed()
+        if TESTING:
+            keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_h]:
-            self.force_heal()
-        elif keys[pygame.K_g]:
-            self.force_ammo()
-        elif keys[pygame.K_j]:
-            self.timer = 10
+            if keys[pygame.K_h]:
+                self.force_heal()
+            elif keys[pygame.K_g]:
+                self.force_ammo()
+            elif keys[pygame.K_j]:
+                self.timer = 10
+            elif keys[pygame.K_r]:
+                self.Reset()
         ######################
 
         self.timer -= 1
