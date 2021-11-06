@@ -58,7 +58,7 @@ class Player(pygame.sprite.Sprite):
         self.input_keys = {1:{"left": pygame.K_a, "right": pygame.K_d, "up": pygame.K_w, "down": pygame.K_s, "shooting": pygame.K_e}, 2:{"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up": pygame.K_UP, "down": pygame.K_DOWN, "shooting": pygame.K_RCTRL}}
 
         #Shadows
-        self.shadow_img = pygame.transform.scale(pygame.image.load('assets/EXTRAS/Shadow.png'), (self.rect.width, self.rect.height * .25))
+        self.shadow_img = pygame.transform.scale(pygame.image.load('assets/EXTRAS/Shadow.png'), (80 * screen_scale, 80 * screen_scale))
 
     def import_character_assets(self,player_color):
         # Import all char. frames (and sounds)
@@ -264,7 +264,11 @@ class Player(pygame.sprite.Sprite):
         self.direction.y = self.jump_speed
     
     def draw_shadows(self, win):
-        if self.on_ground: win.blit(self.shadow_img, (self.rect.left, self.rect.bottom - (25 * screen_scale)))
+        if self.on_ground: 
+            if self.facing_right:
+                win.blit(self.shadow_img, (self.rect.left + (10 * screen_scale), self.rect.bottom - (45 * screen_scale)))
+            else:
+                win.blit(self.shadow_img, (self.rect.left + (50 * screen_scale), self.rect.bottom - (45 * screen_scale)))
 
     def update(self):
         if self.can_move:
