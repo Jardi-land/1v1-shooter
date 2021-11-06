@@ -94,7 +94,8 @@ def main_menu() -> str:
         
         pygame.display.update()
 
-def choose_char_menu(lock) -> str:
+def choose_char_menu() -> list[str]:
+    colors = []
     screen = pygame.display.set_mode(screen_res)
     pygame.display.set_caption("Choose your character")
     pygame.mouse.set_visible(True)
@@ -140,45 +141,47 @@ def choose_char_menu(lock) -> str:
         green_button.draw(screen)
 
         if not double_check:
-            if lock == "yellow":
+            if "yellow" in colors:
                 screen.blit(LOCKER,(1245*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
             else:
                 if yellow_button.switch_image(mouse):
                     if pygame.mouse.get_pressed()[0]:
-                        return 'yellow'
+                        colors.append('yellow')
 
-            if lock == "blue":
+            if "blue" in colors:
                 screen.blit(LOCKER,(1100*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
             else:
                 if blue_button.switch_image(mouse):
                     if pygame.mouse.get_pressed()[0]:
-                        return 'blue'
+                        colors.append('blue')
             
-            if lock == "red":
+            if "red" in colors:
                 screen.blit(LOCKER,(955*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
             else:
                 if red_button.switch_image(mouse):
                     if pygame.mouse.get_pressed()[0]:
-                        return 'red'
+                        colors.append('red')
 
-            if lock == "black":
+            if "black" in colors:
                 screen.blit(LOCKER,(810*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
             else:
                 if black_button.switch_image(mouse):
                     if pygame.mouse.get_pressed()[0]:
-                        return 'black'
+                        colors.append('black')
 
-            if lock == "green":
+            if "green" in colors:
                 screen.blit(LOCKER,(660*screen_scale- LOCKER.get_width()/2, screen_res[1]/1.75 - LOCKER.get_height()/2))
             else:
                 if green_button.switch_image(mouse):
                     if pygame.mouse.get_pressed()[0]:
-                        return 'green'
+                        colors.append('green')
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
             
-        
         pygame.display.update()
+
+        if len(colors) >= 2:
+            return colors
