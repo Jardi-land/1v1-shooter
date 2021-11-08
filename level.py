@@ -263,16 +263,16 @@ class Level:
         # Tiles
         self.Tiles.update(self.world_shift)
         self.Tiles.draw(self.display_surface)
-
-        #shadows
-        self.Player.sprite.draw_shadows(self.display_surface)
-        self.Player_2.sprite.draw_shadows(self.display_surface)
         
         # Player (1/2)
         self.Player.update()
         self.Player_2.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
+
+        #shadows
+        self.Player.sprite.draw_shadows(self.display_surface)
+        self.Player_2.sprite.draw_shadows(self.display_surface)
 
         # Bullet
         self.bullet_display()
