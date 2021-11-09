@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         # Bullet
         self.bullet_spot = [self.rect.x, self.rect.y]
         self.cooldown_bol = False #comme ca on peut pas shooter direct
-        self.cooldown_frame = 0 #Frame per sec = 60 => 1 sec
+        self.cooldown_frame = 1 #Frame per sec = 60 => 1 sec
 
         # Player Movement
         self.direction = pygame.math.Vector2(0,0)
