@@ -62,17 +62,21 @@ class countdown(pygame.sprite.Sprite):
         super().__init__()
         
         self.img_brut = pygame.image.load(f"game_files/font/font_img/number/1.png").convert_alpha()
-        self.image = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/1.png").convert_alpha(), (int(self.img_brut.get_width()*(1/30)*screen_scale), int(self.img_brut.get_height()*(1/30)*screen_scale)))
+
+        self.img_1 = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/1.png").convert_alpha(), (int(self.img_brut.get_width()*(1/30)*screen_scale), int(self.img_brut.get_height()*(1/30)*screen_scale)))
+        self.img_2 = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/2.png").convert_alpha(), (int(self.img_brut.get_width()*(1/30)*screen_scale), int(self.img_brut.get_height()*(1/30)*screen_scale)))
+        self.img_3 = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/3.png").convert_alpha(), (int(self.img_brut.get_width()*(1/30)*screen_scale), int(self.img_brut.get_height()*(1/30)*screen_scale)))
+        
         self.rect = self.image.get_rect(topleft = (screen_res[0]/2 - self.image.get_width()/2, screen_res[1]/3 - self.image.get_height()/2))
 
     def update(self,cooldown_frame, can_move):
         if can_move:
             self.kill()
         if cooldown_frame > 60:
-            self.image = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/1.png").convert_alpha(), (int(self.img_brut.get_width()*((cooldown_frame-60)/25)*screen_scale), int(self.img_brut.get_height()*((cooldown_frame-60)/25)*screen_scale)))
+            self.image = pygame.transform.scale(self.img_1, (int(self.img_brut.get_width()*((cooldown_frame-60)/25)*screen_scale), int(self.img_brut.get_height()*((cooldown_frame-60)/25)*screen_scale)))
         elif cooldown_frame > 30:
-            self.image = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/2.png").convert_alpha(), (int(self.img_brut.get_width()*((cooldown_frame-30)/25)*screen_scale), int(self.img_brut.get_height()*((cooldown_frame-30)/25)*screen_scale)))
+            self.image = pygame.transform.scale(self.img_2, (int(self.img_brut.get_width()*((cooldown_frame-30)/25)*screen_scale), int(self.img_brut.get_height()*((cooldown_frame-30)/25)*screen_scale)))
         else:
-            self.image = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/3.png").convert_alpha(), (int(self.img_brut.get_width()*(cooldown_frame/25)*screen_scale), int(self.img_brut.get_height()*(cooldown_frame/25)*screen_scale)))
+            self.image = pygame.transform.scale(self.img_3, (int(self.img_brut.get_width()*(cooldown_frame/25)*screen_scale), int(self.img_brut.get_height()*(cooldown_frame/25)*screen_scale)))
         
         self.rect = self.image.get_rect(topleft = (screen_res[0]/2 - self.image.get_width()/2, screen_res[1]/3.5 - self.image.get_height()/2))
