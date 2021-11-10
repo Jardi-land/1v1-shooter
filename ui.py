@@ -67,7 +67,8 @@ class countdown(pygame.sprite.Sprite):
         self.img_2 = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/2.png").convert_alpha(), (int(self.img_brut.get_width()*(1/30)*screen_scale), int(self.img_brut.get_height()*(1/30)*screen_scale)))
         self.img_3 = pygame.transform.scale(pygame.image.load(f"game_files/font/font_img/number/3.png").convert_alpha(), (int(self.img_brut.get_width()*(1/30)*screen_scale), int(self.img_brut.get_height()*(1/30)*screen_scale)))
         
-        self.rect = self.image.get_rect(topleft = (screen_res[0]/2 - self.image.get_width()/2, screen_res[1]/3 - self.image.get_height()/2))
+        self.rect = self.img_1.get_rect(topleft = (screen_res[0]/2 - self.image.get_width()/2, screen_res[1]/3 - self.image.get_height()/2))
+
 
     def update(self,cooldown_frame, can_move):
         if can_move:
