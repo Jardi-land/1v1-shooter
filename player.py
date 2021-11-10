@@ -267,7 +267,7 @@ class Player(pygame.sprite.Sprite):
         self.direction.y = self.jump_speed
     
     def draw_shadows(self, win):
-        if self.on_ground: 
+        if self.on_ground and self.is_alive: 
             if self.facing_right:
                 win.blit(self.shadow_img, (self.rect.left + (10 * screen_scale), self.rect.bottom - (45 * screen_scale)))
             else:
