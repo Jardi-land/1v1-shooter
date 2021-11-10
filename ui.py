@@ -69,6 +69,7 @@ class countdown(pygame.sprite.Sprite):
         
         self.rect = self.img_1.get_rect(topleft = (screen_res[0]/2 - self.image.get_width()/2, screen_res[1]/3 - self.image.get_height()/2))
 
+
     def update(self,cooldown_frame, can_move):
         if can_move:
             self.kill()
