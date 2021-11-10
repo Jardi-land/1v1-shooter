@@ -49,6 +49,10 @@ class Level:
 
         #power up test
         self.pwup = PowerUp(10)
+
+        #once dead
+        self.dead_cooldown = 7 * DEFAULT_FPS
+        self.dead_counter = 0
         
 
     def setup_level(self,layout,player_1, player_2):
@@ -309,6 +313,9 @@ class Level:
         self.countdown_f()
 
         if self.Player.sprite.is_alive == False or self.Player_2.sprite.is_alive == False:
+            self.dead_counter += 1
+
+        if self.dead_counter >= self.dead_cooldown:
             return False
         else:
             return True
