@@ -94,7 +94,7 @@ def main_menu() -> str:
         
         pygame.display.update()
 
-def choose_char_menu() -> list[str]:
+def choose_char_menu():
     colors = []
     screen = pygame.display.set_mode(screen_res)
     pygame.display.set_caption("Choose your character")

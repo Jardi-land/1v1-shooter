@@ -256,6 +256,7 @@ class Player(pygame.sprite.Sprite):
         # Change the player death status
         if self.health <= 0:
             self.is_alive = False
+            return False
 
     def apply_gravity(self):
         # G for player
@@ -284,4 +285,4 @@ class Player(pygame.sprite.Sprite):
 
         self.animate()
         self.get_bullet_pos()
-        self.is_alive_func()
+        return self.is_alive_func()

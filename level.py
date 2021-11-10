@@ -276,8 +276,10 @@ class Level:
         self.Tiles.draw(self.display_surface)
         
         # Player (1/2)
-        self.Player.update()
-        self.Player_2.update()
+        if not self.Player.update():
+            return False
+        if not self.Player_2.update():
+            return False
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
 
