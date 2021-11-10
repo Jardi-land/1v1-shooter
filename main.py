@@ -10,7 +10,7 @@ from tiles import Tiles
 from menu import main_menu, choose_char_menu
 
 pygame.init()
-def main(player_1, player_2):
+def Game(player_1, player_2):
 
     screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
     pygame.display.set_caption(window_name)
@@ -30,13 +30,18 @@ def main(player_1, player_2):
                 exit()
 
         screen.blit(bg_surf,(0,0))
-        level.draw()
+        if not level.draw():
+            main()
 
         pygame.display.update()
         clock.tick(DEFAULT_FPS)
 
-if __name__ == '__main__':
+
+def main():
     action = main_menu()
     if action == 'play':
         player_1, player_2 = choose_char_menu()
-        main(player_1, player_2)
+        Game(player_1, player_2)
+
+if __name__ == '__main__':
+    main()
