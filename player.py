@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
                         }
 
         #Shadows
-        self.shadow_img = pygame.transform.scale(pygame.image.load('game_files/shadow/Shadow.png'), (80 * screen_scale, 80 * screen_scale))
+        self.shadow_img = pygame.transform.scale(pygame.image.load('game_files/shadow/Shadow.png'), (int(80 * screen_scale), int(80 * screen_scale)))
 
     def import_character_assets(self,player_color):
         # Import all char. frames (and sounds)
