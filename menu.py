@@ -1,5 +1,6 @@
 import os
 import sys, pygame
+from typing import Tuple
 from settings import *
 """temp"""
 class txt:
@@ -185,3 +186,28 @@ def choose_char_menu():
 
         if len(colors) >= 2:
             return colors
+
+def end_screen(pid, winner_color):
+    from main import main
+    from ui import mugshot
+    screen = pygame.display.set_mode(screen_res)
+    pygame.display.set_caption("Choose your character")
+    pygame.mouse.set_visible(True)
+    winner_pl = mugshot(pid, winner_color)
+
+    while True:
+        screen.fill((0,0,0))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            keys = pygame.key.get_pressed()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == keys[K_ESCAPE]:
+                    main()
+
+        screen.blit(winner_pl.image, (0,0))
+
+        pygame.display.update()
