@@ -31,7 +31,7 @@ class PowerUp(pygame.sprite.Sprite):
     def draw(self, win):
         self.update()
         self.frame_index += self.animation_speed
-        self.image = self.posible_images[self.power_type]["appear"][int(self.frame_index)]
+        self.image = self.posible_images[0]['appear'][int(self.frame_index)]
         if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
             self.frame_index = 0
         win.blit(self.image, self.pos)
