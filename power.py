@@ -12,8 +12,8 @@ class PowerUp(pygame.sprite.Sprite):
         self.size = pygame.math.Vector2(int(100*screen_scale), int(100*screen_scale))
         appear = import_folder('1v1-shooter/game_files/power_ups/heart/appear', self.size.x, self.size.y)
         disappear = import_folder('1v1-shooter/game_files/power_ups/heart/disappear', self.size.x, self.size.y)
-        self.posible_images = {1:{'appear' : appear, 'disappear' : disappear},
-                               2:{}}
+        self.posible_images = {0:{'appear' : appear, 'disappear' : disappear},
+                               1:{}}
 
         self.frame_index = 0
         self.animation_speed = 0.15
