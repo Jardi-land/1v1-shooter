@@ -29,11 +29,19 @@ class PowerUp(pygame.sprite.Sprite):
         self.cooldown = respawn_cooldown_seconds * DEFAULT_FPS
 
     def draw(self, win):
-        self.update()
-        self.frame_index += self.animation_speed
-        self.image = self.posible_images[0]['appear'][int(self.frame_index)]
-        if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
-            self.frame_index = 0
+        # self.update()
+        # self.len_animation = len(self.possible_images[0]["appear"]) / self.animation_speed
+        # if self.timer == self.len_animation:
+        #     self.animate = True
+
+        # if self.animate:
+
+        # if self.timer <= 240/len(appear)
+        # self.frame_index += self.animation_speed
+        # self.image = self.posible_images[0]['appear'][int(self.frame_index)]
+
+        # if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
+        #     self.frame_index = 0
         win.blit(self.image, self.pos)
         
     def Reset(self):
