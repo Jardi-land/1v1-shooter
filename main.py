@@ -7,7 +7,7 @@ from level import *
 from player import *
 from settings import *
 from tiles import Tiles
-from menu import main_menu, choose_char_menu
+from menu import main_menu, choose_char_menu, end_screen
 
 pygame.init()
 def Game(player_1, player_2):
@@ -30,8 +30,9 @@ def Game(player_1, player_2):
                 exit()
 
         screen.blit(bg_surf,(0,0))
-        if not level.draw():
-            main()
+        won, pid, winner_color = level.draw()
+        if not [0]:
+            end_screen()
 
         pygame.display.update()
         clock.tick(DEFAULT_FPS)

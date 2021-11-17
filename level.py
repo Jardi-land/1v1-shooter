@@ -316,6 +316,9 @@ class Level:
             self.dead_counter += 1
 
         if self.dead_counter >= self.dead_cooldown:
-            return False
+            if self.Player.sprite.is_alive == False:
+                return False, self.Player.sprite.color, self.Player.sprite.pid 
+            elif self.Player_2.sprite.is_alive == False:
+                return False, self.Player_2.sprite.color, self.Player_2.sprite.pid 
         else:
-            return True
+            return True, None, None
