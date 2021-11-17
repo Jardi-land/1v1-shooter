@@ -21,7 +21,7 @@ class PowerUp(pygame.sprite.Sprite):
         self.posible_pos = self.sort_power_spots(firstmap)
         self.pos, self.power_type = self.pick_spot()
 
-        self.image = self.posible_images[self.power_type]
+        self.image = self.posible_images[self.power_type]["appear"][0]
         self.rect = self.image.get_rect(topleft=self.pos)
         
         self.has_spawned = False
