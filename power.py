@@ -13,7 +13,6 @@ class PowerUp(pygame.sprite.Sprite):
         appear = import_folder('1v1-shooter/game_files/power_ups/heart/appear', self.size.x, self.size.y)
         disappear = import_folder('1v1-shooter/game_files/power_ups/heart/disappear', self.size.x, self.size.y)
         self.posible_images = {'appear' : appear, 'disappear' : disappear}
-        print(len(self.posible_images), self.posible_images)
 
         self.posible_pos = self.sort_power_spots(firstmap)
         self.pos, self.power_type = self.pick_spot()

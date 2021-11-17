@@ -12,6 +12,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,pos, player_color, pid):
         super().__init__()
         self.import_character_assets(player_color)
+        self.color = player_color
 
         # Animations
         self.frame_index = 0
