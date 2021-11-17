@@ -1,5 +1,4 @@
 import sys, pygame
-from pygame import key
 from settings import *
 import random as rd
 from menu import txt
@@ -11,7 +10,9 @@ class PowerUp(pygame.sprite.Sprite):
         super().__init__()
         
         self.size = pygame.math.Vector2(int(100*screen_scale), int(100*screen_scale))
-        self.posible_images = import_folder('game_files/power_ups', self.size.x, self.size.y)
+        appear = import_folder('1v1-shooter/game_files/power_ups/heart/appear', self.size.x, self.size.y)
+        disappear = import_folder('1v1-shooter/game_files/power_ups/heart/disappear', self.size.x, self.size.y)
+        self.posible_images = {'appear' : appear, 'disappear' : disappear}
         print(len(self.posible_images), self.posible_images)
 
         self.posible_pos = self.sort_power_spots(firstmap)
