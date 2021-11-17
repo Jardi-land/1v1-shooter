@@ -30,7 +30,7 @@ class PowerUp(pygame.sprite.Sprite):
 
     def draw(self, win):
         self.update()
-        self.len_animation = len(self.possible_images[0]["appear"]) / self.animation_speed
+        self.len_animation = len(self.posible_images[0]["appear"]) / self.animation_speed
         if self.timer <= self.len_animation and self.timer > 0:
             self.animate = True
         else: self.animate = False
