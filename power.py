@@ -12,8 +12,11 @@ class PowerUp(pygame.sprite.Sprite):
         self.size = pygame.math.Vector2(int(100*screen_scale), int(100*screen_scale))
         appear = import_folder('1v1-shooter/game_files/power_ups/heart/appear', self.size.x, self.size.y)
         disappear = import_folder('1v1-shooter/game_files/power_ups/heart/disappear', self.size.x, self.size.y)
-        self.posible_images = {'appear' : appear, 'disappear' : disappear}
-        print(len(self.posible_images), self.posible_images)
+        self.posible_images = {1:{'appear' : appear, 'disappear' : disappear},
+                               2:{}}
+
+        self.frame_index = 0
+        self.animation_speed = 0.15
 
         self.posible_pos = self.sort_power_spots(firstmap)
         self.pos, self.power_type = self.pick_spot()
@@ -27,9 +30,11 @@ class PowerUp(pygame.sprite.Sprite):
 
     def draw(self, win):
         self.update()
-        if self.timer <= 255:
-            self.image.set_alpha(255-self.timer)
-            win.blit(self.image, self.pos)
+        self.frame_index += self.animation_speed
+        self.image = self.posible_images[self.power_type]["appear"][int(self.frame_index)]
+        if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
+            self.frame_index = 0
+        win.blit(self.image, self.pos)
         
     def Reset(self):
         self.has_spawned = False
