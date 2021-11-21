@@ -30,9 +30,9 @@ def Game(player_1, player_2):
                 exit()
 
         screen.blit(bg_surf,(0,0))
-        won, pid, winner_color = level.draw()
-        if not [0]:
-            end_screen()
+        won, winner_color, pid = level.draw()
+        if won:
+            end_screen(pid, winner_color)
 
         pygame.display.update()
         clock.tick(DEFAULT_FPS)

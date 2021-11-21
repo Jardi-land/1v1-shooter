@@ -47,8 +47,8 @@ class Level:
 
         self.countdown_start.add(countdown())
 
-        #power up test
-        self.pwup = PowerUp(10)
+        #power up
+        #self.pwup = PowerUp(10)
 
         #once dead
         self.dead_cooldown = 7 * DEFAULT_FPS
@@ -308,7 +308,7 @@ class Level:
         self.mugshot()
         
         #pw
-        self.power_up_update()
+        #self.power_up_update()
 
         self.countdown_f()
 
@@ -317,8 +317,8 @@ class Level:
 
         if self.dead_counter >= self.dead_cooldown:
             if self.Player.sprite.is_alive == False:
-                return False, self.Player.sprite.color, self.Player.sprite.pid 
+                return True, self.Player_2.sprite.color, self.Player_2.sprite.id 
             elif self.Player_2.sprite.is_alive == False:
-                return False, self.Player_2.sprite.color, self.Player_2.sprite.pid 
+                return True, self.Player.sprite.color, self.Player.sprite.id 
         else:
-            return True, None, None
+            return False, None, None

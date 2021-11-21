@@ -187,27 +187,30 @@ def choose_char_menu():
         if len(colors) >= 2:
             return colors
 
-def end_screen(pid, winner_color):
+def end_screen(pid : int, winner_color : str):
     from main import main
     from ui import mugshot
+
     screen = pygame.display.set_mode(screen_res)
-    pygame.display.set_caption("Choose your character")
     pygame.mouse.set_visible(True)
     winner_pl = mugshot(pid, winner_color)
+    blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
+
+    winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='The winner is...', font_size=60)
 
     while True:
-        screen.fill((0,0,0))
+        screen.fill((118, 120, 134))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            keys = pygame.key.get_pressed()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == keys[K_ESCAPE]:
+                if event.key == pygame.K_ESCAPE:
                     main()
 
-        screen.blit(winner_pl.image, (0,0))
+        screen.blit(winner_pl.image, blit_pos)
+        winner_txt.draw(screen)
 
         pygame.display.update()
