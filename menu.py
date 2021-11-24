@@ -63,6 +63,34 @@ class button:
             self.image = self.default_image
             return False
 
+class button_color:
+    def __init__(self, x, y, transx, transy, color, alternate_color=None) -> None: 
+        self.size = pygame.math.Vector2(transx, transy)
+        self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
+
+        self.defaul_color = color
+        self.other_color = alternate_color if alternate_color != None else None
+
+        self.color = self.defaul_color
+
+    def draw(self, win):
+        pygame.draw.rect(win, self.color, (self.pos, self.size))
+
+    def is_Over(self, pos):
+        if self.pos.x < pos[0] and self.pos.x + self.size.x > pos[0]:
+            if self.pos.y < pos[1] and self.pos.y + self.size.y > pos[1]:
+                return True
+        return False
+
+    def switch_color(self, pos):
+        if self.is_Over(pos):
+            if self.alternate_color != None:
+                self.color = self.alternate_color
+            return True
+        else:
+            self.color = self.default_color
+            return False
+
 def main_menu() -> str:
     screen = pygame.display.set_mode(screen_res)
     pygame.display.set_caption("Main menu")
@@ -191,15 +219,21 @@ def end_screen(pid : int, winner_color : str):
     from ui import mugshot
 
     screen = pygame.display.set_mode(screen_res)
+    WIDTH, HEIGHT = screen.get_width(), screen.get_height()
     pygame.mouse.set_visible(True)
     winner_pl = mugshot(pid, winner_color)
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
     winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='The winner is...', font_size=60)
-    exit_button = button()
+    exit_button = button_color(WIDTH/2, (HEIGHT/5)*4, 100, 50, (255,0,0), (0,0,255))
 
     while True:
         screen.fill((118, 120, 134))
+        mouse = pygame.mouse.get_pos()
+
+        if exit_button.switch_color(mouse):
+            if pygame.mouse.get_pressed()[0]:
+                main()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -211,6 +245,7 @@ def end_screen(pid : int, winner_color : str):
                     main()
 
         screen.blit(winner_pl.image, blit_pos)
+        exit_button.draw(screen)
         winner_txt.draw(screen)
 
         pygame.display.update()
