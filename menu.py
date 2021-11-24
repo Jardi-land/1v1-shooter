@@ -71,7 +71,7 @@ class button_color:
         self.default_color = color
         self.other_color = alternate_color if alternate_color != None else None
 
-        self.color = self.defaul_color
+        self.color = self.default_color
 
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.pos, self.size))
@@ -84,8 +84,8 @@ class button_color:
 
     def switch_color(self, pos):
         if self.is_Over(pos):
-            if self.alternate_color != None:
-                self.color = self.alternate_color
+            if self.other_color != None:
+                self.color = self.other_color
             return True
         else:
             self.color = self.default_color
