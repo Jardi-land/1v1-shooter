@@ -52,14 +52,15 @@ class PowerUp(pygame.sprite.Sprite):
             if self.frame_index >= len(self.posible_images[self.power_type]["disappear"]):
                 self.disappear = False
                 self.frame_index = 0
+                self.pick_new_spot()
+                self.image = self.posible_images[0]
+                self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
             win.blit(self.image, self.pos)
         
     def Reset(self):
         self.disappear = True
         self.has_spawned = False
-        self.pick_new_spot()
-        self.image = self.posible_images[0]
-        self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
+        
 
     def update(self):
         #for testing
