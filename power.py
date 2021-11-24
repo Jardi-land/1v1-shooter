@@ -44,7 +44,7 @@ class PowerUp(pygame.sprite.Sprite):
                 self.frame_index = 0
             win.blit(self.image, self.pos)
 
-        if self.has_spawned or self.timer > 5:
+        if self.has_spawned or self.timer < int(self.animation_speed * 100) + 1:
             win.blit(self.image, self.pos)
         
         
