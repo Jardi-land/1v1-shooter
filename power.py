@@ -17,7 +17,7 @@ class PowerUp(pygame.sprite.Sprite):
 
         self.frame_index = 0
         self.animation_speed = 0.125
-        self.power_up_anim_finish = False
+        self.disappear = False
 
         self.posible_pos = self.sort_power_spots(firstmap)
         self.pos, self.power_type = self.pick_spot()
@@ -40,24 +40,22 @@ class PowerUp(pygame.sprite.Sprite):
             self.image = self.posible_images[0]['appear'][int(self.frame_index)]
             self.frame_index += self.animation_speed
             if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
-                self.power_up_anim_finish = True
                 self.frame_index = 0
             win.blit(self.image, self.pos)
 
         if self.has_spawned or self.timer < int(self.animation_speed * 100) + 1:
             win.blit(self.image, self.pos)
         
-        
-        # if self.timer <= 240/len(appear)
-        # self.frame_index += self.animation_speed
-        # self.image = self.posible_images[0]['appear'][int(self.frame_index)]
-
-        # if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
-        #     self.frame_index = 0
-
-        # win.blit(self.image, self.pos)
+        if self.disappear:
+            self.image = self.posible_images[0]['disappear'][int(self.frame_index)]
+            self.frame_index += self.animation_speed
+            if self.frame_index >= len(self.posible_images[self.power_type]["disappear"]):
+                self.disappear = False
+                self.frame_index = 0
+            win.blit(self.image, self.pos)
         
     def Reset(self):
+        self.disappear = True
         self.has_spawned = False
         self.pick_new_spot()
         self.image = self.posible_images[0]
