@@ -48,7 +48,7 @@ class Level:
         self.countdown_start.add(countdown())
 
         #power up
-        #self.pwup = PowerUp(10)
+        self.pwup = PowerUp(10)
 
         #once dead
         self.dead_cooldown = 7 * DEFAULT_FPS
@@ -308,7 +308,7 @@ class Level:
         self.mugshot()
         
         #pw
-        #self.power_up_update()
+        self.power_up_update()
 
         self.countdown_f()
 
