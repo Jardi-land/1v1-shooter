@@ -60,7 +60,7 @@ class PowerUp(pygame.sprite.Sprite):
     def Reset(self):
         self.has_spawned = False
         self.pick_new_spot()
-        self.image = self.posible_images[self.power_type]
+        self.image = self.posible_images[0]
         self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
 
     def update(self):
