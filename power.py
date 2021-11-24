@@ -40,12 +40,12 @@ class PowerUp(pygame.sprite.Sprite):
             self.image = self.posible_images[0]['appear'][int(self.frame_index)]
             self.frame_index += self.animation_speed
             if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
-                self.frame_index = 0
                 self.power_up_anim_finish = True
+                self.frame_index = 0
             win.blit(self.image, self.pos)
-
+        print(self.power_up_anim_finish)
         
-        if self.power_up_anim_finsh:
+        if self.power_up_anim_finish:
             win.blit(self.image, self.pos)
         
         # if self.timer <= 240/len(appear)
