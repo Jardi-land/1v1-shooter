@@ -53,7 +53,6 @@ class PowerUp(pygame.sprite.Sprite):
                 self.disappear = False
                 self.frame_index = 0
                 self.pick_new_spot()
-                self.image = self.image
                 self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
             win.blit(self.image, self.pos)
         
