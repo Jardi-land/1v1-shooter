@@ -1,6 +1,5 @@
 import os
 import sys, pygame
-from typing import Tuple
 from settings import *
 """temp"""
 class txt:
@@ -197,6 +196,7 @@ def end_screen(pid : int, winner_color : str):
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
     winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='The winner is...', font_size=60)
+    exit_button = button()
 
     while True:
         screen.fill((118, 120, 134))
