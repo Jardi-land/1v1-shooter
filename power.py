@@ -9,14 +9,14 @@ class PowerUp(pygame.sprite.Sprite):
     def __init__(self, respawn_cooldown_seconds):
         super().__init__()
         
-        self.size = pygame.math.Vector2(int(150*screen_scale), int(150*screen_scale))
+        self.size = pygame.math.Vector2(int(125*screen_scale), int(125*screen_scale))
         appear = import_folder('game_files/power_ups/heart/appear', self.size.x, self.size.y)
         disappear = import_folder('game_files/power_ups/heart/disappear', self.size.x, self.size.y)
         self.posible_images = {0:{'appear' : appear, 'disappear' : disappear},
                                1:{'appear' : appear, 'disappear' : disappear}}
 
         self.frame_index = 0
-        self.animation_speed = 0.1
+        self.animation_speed = 0.125
         self.power_up_anim_finish = False
 
         self.posible_pos = self.sort_power_spots(firstmap)
