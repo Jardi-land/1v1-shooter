@@ -43,9 +43,8 @@ class PowerUp(pygame.sprite.Sprite):
                 self.power_up_anim_finish = True
                 self.frame_index = 0
             win.blit(self.image, self.pos)
-        print(self.power_up_anim_finish)
 
-        if self.power_up_anim_finish:
+        if self.has_spawned:
             win.blit(self.image, self.pos)
         
         
