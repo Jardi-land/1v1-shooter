@@ -225,7 +225,7 @@ def end_screen(pid : int, winner_color : str):
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
     winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='The winner is...', font_size=60)
-    exit_button = button_color(WIDTH/2, (HEIGHT/5)*4, 100, 50, (255,0,0), (0,0,255))
+    exit_button = button_color(WIDTH/2, (HEIGHT/5)*4, 100*screen_scale, 50*screen_scale, (255,0,0), (0,0,255))
 
     while True:
         screen.fill((118, 120, 134))
