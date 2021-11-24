@@ -68,7 +68,7 @@ class button_color:
         self.size = pygame.math.Vector2(transx, transy)
         self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
 
-        self.defaul_color = color
+        self.default_color = color
         self.other_color = alternate_color if alternate_color != None else None
 
         self.color = self.defaul_color
