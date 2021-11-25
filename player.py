@@ -176,7 +176,7 @@ class Player(pygame.sprite.Sprite):
             self.double_jump = self.double_jump - 2
         elif not keys[self.input_keys[self.id]["up"]] and self.input:
             self.single_w = True
-            if keys[pygame.K_s] and self.on_ground and self.input:
+            if keys[self.input_keys[self.id]["down"]] and self.on_ground and self.input:
                 self.want_crouch = True
             else:
                 self.want_crouch = False
