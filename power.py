@@ -49,6 +49,7 @@ class PowerUp(pygame.sprite.Sprite):
             win.blit(self.image, self.pos)
         
         if self.disappear:
+            self.has_spawned = False
             self.image = self.posible_images[0]['disappear'][int(self.frame_index)]
             self.frame_index += self.animation_speed
             if self.frame_index >= len(self.posible_images[self.power_type]["disappear"]):
@@ -56,16 +57,15 @@ class PowerUp(pygame.sprite.Sprite):
                 self.frame_index = 0
                 self.pick_new_spot()
                 self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
-            win.blit(self.image, self.pos)
+            else:
+                win.blit(self.image, self.pos)
 
         self.degug_txt.text = f"{self.has_spawned}, {self.disappear}"
         self.degug_txt.draw(win)
         
     def Reset(self):
         self.disappear = True
-        self.has_spawned = False
         
-
     def update(self):
         #for testing
         if TESTING:
