@@ -29,7 +29,6 @@ class PowerUp(pygame.sprite.Sprite):
         self.timer = respawn_cooldown_seconds * DEFAULT_FPS
         self.cooldown = respawn_cooldown_seconds * DEFAULT_FPS
 
-        self.degug_txt = txt(200, 200, (255,0,0))
 
     def draw(self, win):
         self.update()
@@ -59,9 +58,6 @@ class PowerUp(pygame.sprite.Sprite):
                 self.timer = rd.randint(0, 10) * DEFAULT_FPS + self.cooldown
             else:
                 win.blit(self.image, self.pos)
-
-        self.degug_txt.text = f"{self.has_spawned}, {self.disappear}"
-        self.degug_txt.draw(win)
         
     def Reset(self):
         self.disappear = True

@@ -1,10 +1,14 @@
 screen_res_array = {"hd":[1920, 1080],"2":[1536, 864],"3":[1152, 648],"4":[768, 432],"5":[384, 216]}
 screen_res = screen_res_array["hd"]
 screen_scale = screen_res[0]/1920
-window_name = "Gunner 1vs1"
 mouse_visible = False
+
+window_name = "Gunner 1vs1"
+
 DEFAULT_FPS = 60
 TESTING = True
+
+gravity = {'normal' : 0.8, 'low' : 0.2}
 
 # " " = nothing
 # "X" = Platform

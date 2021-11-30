@@ -1,6 +1,7 @@
 import os
 import sys, pygame
 from settings import *
+from config import cfg
 """temp"""
 class txt:
     def __init__(self, x, y, color=(255,255,255), text='', pos_mode=0, font_size=30) -> None:
@@ -221,19 +222,27 @@ def end_screen(pid : int, winner_color : str):
     screen = pygame.display.set_mode(screen_res)
     WIDTH, HEIGHT = screen.get_width(), screen.get_height()
     pygame.mouse.set_visible(True)
+    clock = pygame.time.Clock()
+
     winner_pl = mugshot(pid, winner_color)
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
     winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='The winner is...', font_size=60)
+    Skip_txt = txt(WIDTH/2, (HEIGHT/5)*4, (0,0,0), text='SKIP')
     exit_button = button_color(WIDTH/2, (HEIGHT/5)*4, 100*screen_scale, 50*screen_scale, (255,0,0), (0,0,255))
+    counter = 0
 
     while True:
+        clock.tick(DEFAULT_FPS)
         screen.fill((118, 120, 134))
         mouse = pygame.mouse.get_pos()
 
-        if exit_button.switch_color(mouse):
-            if pygame.mouse.get_pressed()[0]:
-                main()
+        if counter >= cfg.end_screen_cd * DEFAULT_FPS:
+            exit_button.draw(screen)
+            Skip_txt.draw(screen)
+            if exit_button.switch_color(mouse):
+                if pygame.mouse.get_pressed()[0]:
+                    main()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -245,7 +254,7 @@ def end_screen(pid : int, winner_color : str):
                     main()
 
         screen.blit(winner_pl.image, blit_pos)
-        exit_button.draw(screen)
         winner_txt.draw(screen)
 
+        counter += 1
         pygame.display.update()

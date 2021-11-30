@@ -9,6 +9,7 @@ from player import Player
 from bullet import Bullet, Muzzle_flash
 from ui import ui, cooldown_ui, mugshot, countdown
 from power import PowerUp
+from config import cfg
 
 class Level:
     def __init__(self,level_data,surface,player_1, player_2):
@@ -51,7 +52,7 @@ class Level:
         self.pwup = PowerUp(10)
 
         #once dead
-        self.dead_cooldown = 7 * DEFAULT_FPS
+        self.dead_cooldown = cfg.death_cooldown * DEFAULT_FPS
         self.dead_counter = 0
         
 

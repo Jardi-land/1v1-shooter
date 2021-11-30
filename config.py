@@ -6,16 +6,22 @@ class Config:
         self.WEAPON_COOLDOWN: int
         self.GRAVITY_MODE: str
         
-        
+        self.death_cooldown: int
+        self.end_screen_cd: int
+
         self.file = config_file
         self.load(self.file)
 
     def load(self, file):
         Cfg = cp.ConfigParser()
         Cfg.read(file)
-        self.MAX_HEALTH = Cfg.get('GameVars', 'MAX_HEALTH')
-        self.WEAPON_COOLDOWN = Cfg.get('GameVars', 'WEAPON_COOLDOWN')
-        self.GRAVITY_MODE = Cfg.get('GameVars', 'GRAVITY_MODE')
+        self.MAX_HEALTH = Cfg.get('Gameplay', 'MAX_HEALTH')
+        self.WEAPON_COOLDOWN = Cfg.get('Gameplay', 'WEAPON_CD')
+        self.GRAVITY_MODE = Cfg.get('Gameplay', 'GRAVITY_MODE')
+
+        self.death_cooldown = Cfg.getint('GameConfig', 'DEATH_CD')
+        self.end_screen_cd = Cfg.getint('GameConfig', 'ENDSCREEN_CD')
+
 
 
 cfg = Config('config.ini')

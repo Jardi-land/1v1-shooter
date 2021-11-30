@@ -7,6 +7,7 @@ from settings import *
 from pygame import mixer
 from support import import_folder
 from mixer_sounds import import_sounds
+from config import cfg
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos, player_color, pid):
@@ -33,7 +34,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2(0,0)
         self.can_move = False
         self.speed = 10*screen_scale
-        self.gravity = 0.8*screen_scale
+        self.gravity = gravity[cfg.GRAVITY_MODE]*screen_scale
         self.jump_speed = -15*screen_scale
         self.double_jump = 2
 
