@@ -236,6 +236,7 @@ def end_screen(pid : int, winner_color : str):
     while True:
         clock.tick(DEFAULT_FPS)
         screen.fill((118, 120, 134))
+        screen.blit(BG, (0,0))
         mouse = pygame.mouse.get_pos()
 
         if counter >= cfg.end_screen_cd * DEFAULT_FPS:
