@@ -26,7 +26,7 @@ class animation:
         self.restart_when_finished = True
 
     @classmethod
-    def __init__(self, imgs : list, img_count : int, tot_time : float):
+    def __init__(self, x, y, imgs : list, img_count : int, tot_time : float):
         self.images = imgs
         self.image_count = img_count
         self.total_time = tot_time
