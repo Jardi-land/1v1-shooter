@@ -15,10 +15,10 @@ def import_folder(path, x, y):
 """Test class for animating sprites !!still need to be tested!!"""
 class animation:
     @classmethod
-    def __init__(self, x, y,  imgs : list, img_count : int, dt : float):
+    def __init__(self, x, y,  imgs : list, dt : float):
         self.pos = pygame.math.Vector2(x, y)
         self.images = imgs
-        self.image_count = img_count
+        self.image_count = len(self.images)
         self.interval = dt
         self.total_time = self.image_count * self.interval
         self.timer = 0
@@ -26,9 +26,10 @@ class animation:
         self.restart_when_finished = True
 
     @classmethod
-    def __init__(self, x, y, imgs : list, img_count : int, tot_time : float):
+    def __init__(self, x, y, imgs : list, tot_time : float):
+        self.pos = pygame.math.Vector2(x, y)
         self.images = imgs
-        self.image_count = img_count
+        self.image_count = len(self.images)
         self.total_time = tot_time
         self.interval = self.total_time / self.image_count
         self.timer = 0
@@ -50,3 +51,13 @@ class animation:
 
     def draw(self, win):
         win.blit(self.images[self.index], self.pos)
+
+    def set_animation_settings(self, imgs : list = {}, interval_time = 0, tot_time = 0):
+        if imgs != {}:
+            self.images = imgs
+        
+        if interval_time != 0:
+            self.interval = interval_time
+
+        if tot_time != 0:
+            self.total_time = tot_time
