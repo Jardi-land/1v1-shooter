@@ -224,7 +224,7 @@ def end_screen(pid : int, winner_color : str):
     pygame.mouse.set_visible(True)
     clock = pygame.time.Clock()
 
-    BG = pygame.transform.scale(pygame.image.load('game_file/background/test.png'), screen_res)
+    BG = pygame.transform.scale(pygame.image.load('game_files/background/test.png'), screen_res)
     winner_pl = mugshot(pid, winner_color)
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
