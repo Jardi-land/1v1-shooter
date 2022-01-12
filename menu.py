@@ -225,6 +225,7 @@ def end_screen(pid : int, winner_color : str):
     clock = pygame.time.Clock()
 
     BG = pygame.transform.scale(pygame.image.load('game_files/background/test.png'), screen_res)
+    CADRE = pygame.image.load('game_files/ui/cadre.png')
     winner_pl = mugshot(pid, winner_color)
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
@@ -255,6 +256,7 @@ def end_screen(pid : int, winner_color : str):
                 if event.key == pygame.K_ESCAPE:
                     main()
 
+        screen.blit(CADRE, blit_pos)
         screen.blit(winner_pl.image, blit_pos)
         winner_txt.draw(screen)
 
