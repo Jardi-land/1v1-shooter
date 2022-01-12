@@ -225,8 +225,8 @@ def end_screen(pid : int, winner_color : str):
     clock = pygame.time.Clock()
 
     BG = pygame.transform.scale(pygame.image.load('game_files/background/test.png'), screen_res)
-    CADRE = pygame.image.load('game_files/ui/cadre.png')
     winner_pl = mugshot(pid, winner_color)
+    CADRE = pygame.transform.scale(pygame.image.load('game_files/ui/cadre.png'), (winner_pl.image.get_width(),winner_pl.image.get_height()))
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
     winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='THE WINNER IS...', font_size=60)
