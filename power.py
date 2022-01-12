@@ -9,11 +9,14 @@ class PowerUp(pygame.sprite.Sprite):
     def __init__(self, respawn_cooldown_seconds):
         super().__init__()
         
-        self.size = pygame.math.Vector2(int(105*screen_scale), int(105*screen_scale))
-        appear = import_folder('game_files/power_ups/heart/appear', self.size.x, self.size.y)
-        disappear = import_folder('game_files/power_ups/heart/disappear', self.size.x, self.size.y)
-        self.posible_images = {0:{'appear' : appear, 'disappear' : disappear},
-                               1:{'appear' : appear, 'disappear' : disappear}}
+        self.size_heart = pygame.math.Vector2(int(105*screen_scale), int(105*screen_scale))
+        self.size_timer = pygame.math.Vector2(int(87*screen_scale), int(125*screen_scale))
+        self.appear_heart = import_folder('game_files/power_ups/heart/appear', self.size_heart.x, self.size_heart.y)
+        self.disappear_heart = import_folder('game_files/power_ups/heart/disappear', self.size_timer.x, self.size_timer.y)
+        self.appear_timer = import_folder('game_files/power_ups/timer/appear', self.size_timer.x, self.size_timer.y)
+        self.disappear_timer = import_folder('game_files/power_ups/timer/disappear', self.size_timer.x, self.size_timer.y)
+        self.posible_images = {0:{'appear' : self.appear_heart, 'disappear' : self.disappear_heart},
+                               1:{'appear' : self.appear_timer, 'disappear' : self.disappear_timer}}
 
         self.frame_index = 0
         self.animation_speed = 0.25
@@ -22,7 +25,7 @@ class PowerUp(pygame.sprite.Sprite):
         self.posible_pos = self.sort_power_spots(firstmap)
         self.pos, self.power_type = self.pick_spot()
 
-        self.image = appear[0]
+        self.image = self.posible_images[self.power_type]["appear"][0]
         self.rect = self.image.get_rect(topleft=self.pos)
         
         self.has_spawned = False
@@ -32,13 +35,13 @@ class PowerUp(pygame.sprite.Sprite):
 
     def draw(self, win):
         self.update()
-        self.len_animation = len(self.posible_images[0]["appear"]) / self.animation_speed
+        self.len_animation = len(self.posible_images[self.power_type]["appear"]) / self.animation_speed
         if self.timer <= self.len_animation and self.timer > 0:
             self.animate = True
         else: self.animate = False
         
         if self.animate:
-            self.image = self.posible_images[0]['appear'][int(self.frame_index)]
+            self.image = self.posible_images[self.power_type]['appear'][int(self.frame_index)]
             self.frame_index += self.animation_speed
             if self.frame_index >= len(self.posible_images[self.power_type]["appear"]):
                 self.frame_index = 0
@@ -49,7 +52,7 @@ class PowerUp(pygame.sprite.Sprite):
         
         if self.disappear:
             self.has_spawned = False
-            self.image = self.posible_images[0]['disappear'][int(self.frame_index)]
+            self.image = self.posible_images[self.power_type]['disappear'][int(self.frame_index)]
             self.frame_index += self.animation_speed
             if self.frame_index >= len(self.posible_images[self.power_type]["disappear"]):
                 self.disappear = False
