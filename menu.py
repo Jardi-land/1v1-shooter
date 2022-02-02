@@ -231,8 +231,7 @@ def end_screen(pid : int, winner_color : str):
 
     winner_txt = pygame.transform.scale(pygame.image.load("game_files/font/font_img/the_winner_is.png"), (int(960*screen_scale), int(85.5*screen_scale))).convert_alpha()
     winner_txt_pos = (screen.get_width()/2 - winner_txt.get_width()/2, screen.get_height()/4 - winner_txt.get_height()/2)
-    Skip_txt = txt(WIDTH/2, (HEIGHT/5)*4, (0,0,0), text='SKIP')
-    exit_button = button_color(WIDTH/2, (HEIGHT/5)*4, 100*screen_scale, 50*screen_scale, (255,0,0), (0,0,255))
+    skip_button = button_color(WIDTH/2, (HEIGHT/5)*4, 314, 88.5, "game_files/buttons/skip1.png", "game_files/buttons/skip2.png")
     counter = 0
 
     while True:
@@ -242,9 +241,8 @@ def end_screen(pid : int, winner_color : str):
         mouse = pygame.mouse.get_pos()
 
         if counter >= cfg.end_screen_cd * DEFAULT_FPS:
-            exit_button.draw(screen)
-            Skip_txt.draw(screen)
-            if exit_button.switch_color(mouse):
+            skip_button.draw(screen)
+            if skip_button.switch_image(mouse):
                 if pygame.mouse.get_pressed()[0]:
                     main()
 
