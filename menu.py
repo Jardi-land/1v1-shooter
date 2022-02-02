@@ -229,7 +229,8 @@ def end_screen(pid : int, winner_color : str):
     CADRE = pygame.transform.scale(pygame.image.load('game_files/ui/cadre.png'), (winner_pl.image.get_width(), winner_pl.image.get_height()))
     blit_pos = screen_res[0]/2 - winner_pl.image.get_width()/2, screen_res[1]/2 - winner_pl.image.get_height()/2
 
-    winner_txt = txt(screen.get_width()/2, screen.get_height()/5, text='THE WINNER IS...', font_size=60)
+    winner_txt = pygame.transform.scale(pygame.image.load("game_files/font/font_img/the_winner_is.png"), (int(960*screen_scale), int(85.5*screen_scale))).convert_alpha()
+    winner_txt_pos = (screen.get_width()/2 - winner_txt.get_width()/2, screen.get_height()/4 - winner_txt.get_height()/2)
     Skip_txt = txt(WIDTH/2, (HEIGHT/5)*4, (0,0,0), text='SKIP')
     exit_button = button_color(WIDTH/2, (HEIGHT/5)*4, 100*screen_scale, 50*screen_scale, (255,0,0), (0,0,255))
     counter = 0
@@ -258,7 +259,7 @@ def end_screen(pid : int, winner_color : str):
 
         screen.blit(CADRE, blit_pos)
         screen.blit(winner_pl.image, blit_pos)
-        winner_txt.draw(screen)
+        screen.blit(winner_txt, winner_txt_pos)
 
         counter += 1
         pygame.display.update()
