@@ -231,7 +231,7 @@ def end_screen(pid : int, winner_color : str):
 
     winner_txt = pygame.transform.scale(pygame.image.load("game_files/font/font_img/the_winner_is.png"), (int(960*screen_scale), int(85.5*screen_scale))).convert_alpha()
     winner_txt_pos = (screen.get_width()/2 - winner_txt.get_width()/2, screen.get_height()/4 - winner_txt.get_height()/2)
-    skip_button = button_color(WIDTH/2, (HEIGHT/5)*4, 314, 88.5, "game_files/buttons/skip1.png", "game_files/buttons/skip2.png")
+    skip_button = button(WIDTH/2, (HEIGHT/5)*4, 314, 88.5, "game_files/buttons/skip1.png", "game_files/buttons/skip2.png")
     counter = 0
 
     while True:
