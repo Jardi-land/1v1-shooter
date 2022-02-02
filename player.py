@@ -4,9 +4,7 @@ Creator: @Lorenzo_De_ZEN
 
 import sys, pygame
 from settings import *
-from pygame import mixer
 from support import import_folder
-from mixer_sounds import import_sounds
 from config import cfg
 
 class Player(pygame.sprite.Sprite):
