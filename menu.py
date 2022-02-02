@@ -2,37 +2,7 @@ import os
 import sys, pygame
 from settings import *
 from config import cfg
-"""temp"""
-class txt:
-    def __init__(self, x, y, color=(255,255,255), text='', pos_mode=0, font_size=30) -> None:
-        """
-        Simple text class. pos_mode = 0 draw text from the center and 1 from the top left.
-        the class is made so that the x & y values of the topleft corner never go below 0.
-        """
-        newy = 0
-        if y < font_size * .5 and pos_mode == 0:
-            newy = y + int(font_size * .5)
-        else:
-            newy = y
 
-        self.pos = pygame.math.Vector2(x, newy)
-        self.color = color
-        self.pos_mode = pos_mode
-        self.font = pygame.font.SysFont('comicsans', font_size)
-        self.text = text
-    
-    def draw(self, win):
-        txt_ = self.font.render(str(self.text), 1, self.color)
-
-        if self.pos.x < txt_.get_width() * .5 and self.pos_mode == 0:
-            self.pos.x = int(txt_.get_width() * .5)
-
-        if self.pos_mode == 0:
-            win.blit(txt_, (self.pos.x - txt_.get_width()/2, self.pos.y - txt_.get_height()/2))
-        else:
-            win.blit(txt_, self.pos)
-
-""""""
 
 class button:
     def __init__(self, x, y, transx, transy, image_path, alternate_img=None) -> None: 
@@ -62,34 +32,6 @@ class button:
             return True
         else:
             self.image = self.default_image
-            return False
-
-class button_color:
-    def __init__(self, x, y, transx, transy, color, alternate_color=None) -> None: 
-        self.size = pygame.math.Vector2(transx, transy)
-        self.pos = pygame.math.Vector2(x - self.size.x *.5, y - self.size.y *.5)
-
-        self.default_color = color
-        self.other_color = alternate_color if alternate_color != None else None
-
-        self.color = self.default_color
-
-    def draw(self, win):
-        pygame.draw.rect(win, self.color, (self.pos, self.size))
-
-    def is_Over(self, pos):
-        if self.pos.x < pos[0] and self.pos.x + self.size.x > pos[0]:
-            if self.pos.y < pos[1] and self.pos.y + self.size.y > pos[1]:
-                return True
-        return False
-
-    def switch_color(self, pos):
-        if self.is_Over(pos):
-            if self.other_color != None:
-                self.color = self.other_color
-            return True
-        else:
-            self.color = self.default_color
             return False
 
 def main_menu() -> str:
