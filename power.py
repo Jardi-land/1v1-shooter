@@ -1,7 +1,6 @@
 import sys, pygame
 from settings import *
 import random as rd
-from menu import txt
 from support import import_folder
 
 """on pourra changer les pouvoir plus tard ^^"""
