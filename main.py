@@ -16,6 +16,8 @@ def Game(player_1, player_2):
     pygame.display.set_caption(window_name)
     clock = pygame.time.Clock()
     pygame.mouse.set_visible(mouse_visible)
+    py_con = pygame.image.load("game_files/characters/red/mug_shot/Gunner_mugshot.png").convert_alpha()
+    pygame.display.set_icon(py_con)
 
     bg_surf = pygame.Surface((screen_res[0], screen_res[1]))
     bg_surf.fill((118, 120, 134, 255))
