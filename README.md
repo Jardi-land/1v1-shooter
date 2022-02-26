@@ -7,7 +7,6 @@ __Comment jouer ? 🎮__
 ⬇️**Tout d’abord il vous faut des pré-requis:**
 - [Python 3.7](https://www.python.org/downloads/, "Téléchargement de python") ou version supérieure
 - La dernière version de [Pygame](https://www.pygame.org/download.shtml, "pip install pygame")
-- 
 ##
 
 **📂 Ensuite il va falloir télécharger le jeu:**
