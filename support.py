@@ -1,4 +1,3 @@
-from os import walk
 import os.path
 import pygame
 
