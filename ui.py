@@ -14,7 +14,7 @@ class ui(pygame.sprite.Sprite):
         
         self.ui_path = "game_files/ui/clear"
 
-        self.ui_list = import_folder(self.ui_path, int(385*screen_scale), int(120*screen_scale))
+        self.ui_list = import_folder(self.ui_path, int(385*screen_scale), int(120*screen_scale), "clear_ui")
 
     def update(self, player, health):
         if player == 1:
@@ -34,7 +34,7 @@ class cooldown_ui(pygame.sprite.Sprite):
 
         self.ui_path = "game_files/ui/cooldown"
         
-        self.ui_list = import_folder(self.ui_path, int(385*screen_scale), int(120*screen_scale))
+        self.ui_list = import_folder(self.ui_path, int(385*screen_scale), int(120*screen_scale), "cooldown_ui")
     
     def update(self,player,frame):
         if player == 1:

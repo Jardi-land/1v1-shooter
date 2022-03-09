@@ -72,7 +72,7 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = character_path + animation
 
-            self.animations[animation] = import_folder(full_path, self.animations_scale[animation][0], self.animations_scale[animation][1])
+            self.animations[animation] = import_folder(full_path, self.animations_scale[animation][0], self.animations_scale[animation][1], f"Gunner_{animation}")
 
     def animate(self):
         # Play the right animation

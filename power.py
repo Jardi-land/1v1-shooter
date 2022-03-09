@@ -9,10 +9,10 @@ class PowerUp(pygame.sprite.Sprite):
         super().__init__()
         self.size_heart = pygame.math.Vector2(int(105*screen_scale), int(105*screen_scale))
         self.size_timer = pygame.math.Vector2(int(87*screen_scale), int(125*screen_scale))
-        self.appear_heart = import_folder('game_files/power_ups/heart/appear', self.size_heart.x, self.size_heart.y)
-        self.disappear_heart = import_folder('game_files/power_ups/heart/disappear', self.size_timer.x, self.size_timer.y)
-        self.appear_timer = import_folder('game_files/power_ups/timer/appear', self.size_timer.x, self.size_timer.y)
-        self.disappear_timer = import_folder('game_files/power_ups/timer/disappear', self.size_timer.x, self.size_timer.y)
+        self.appear_heart = import_folder('game_files/power_ups/heart/appear', self.size_heart.x, self.size_heart.y, "Appear0")
+        self.disappear_heart = import_folder('game_files/power_ups/heart/disappear', self.size_timer.x, self.size_timer.y, "Disappear0")
+        self.appear_timer = import_folder('game_files/power_ups/timer/appear', self.size_timer.x, self.size_timer.y, "TIMER")
+        self.disappear_timer = import_folder('game_files/power_ups/timer/disappear', self.size_timer.x, self.size_timer.y, "TIMER")
         self.posible_images = {0:{'appear' : self.appear_heart, 'disappear' : self.disappear_heart},
                                1:{'appear' : self.appear_timer, 'disappear' : self.disappear_timer}}
 

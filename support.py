@@ -1,13 +1,18 @@
 from os import walk
+import os.path
 import pygame
 
-def import_folder(path, x, y):
+def import_folder(path, x, y, name):
     surface_list = []
+    surface_numb = 1
 
-    for _,__,img_files in walk(path):
-        for image in img_files:
-            full_path = path + "/" + image
-            image_surf = pygame.transform.scale(pygame.image.load(full_path).convert_alpha(), (int(x), int(y))).convert_alpha()
-            surface_list.append(image_surf)
-    
+    while True:
+        if os.path.exists(f"{path}/{name}{surface_numb}.png"):
+            surface_list.append(pygame.transform.scale(pygame.image.load(f"{path}/{name}{surface_numb}.png").convert_alpha(), (int(x), int(y))))
+            surface_numb += 1
+        else: break
+
+    if surface_numb == 1:
+        print("path doesn't exist")
+
     return surface_list
