@@ -6,7 +6,7 @@ mouse_visible = False
 window_name = "Gunner 1vs1"
 
 DEFAULT_FPS = 60
-TESTING = True
+TESTING = False
 
 gravity = {'normal' : 0.8, 'low' : 0.2}
 
