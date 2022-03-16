@@ -57,7 +57,7 @@ class Player(pygame.sprite.Sprite):
         self.id = pid
         self.input_keys = {
                             1: {"left": pygame.K_a, "right": pygame.K_d, "up": pygame.K_w, "down": pygame.K_s, "shooting": pygame.K_e}, 
-                            2: {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up": pygame.K_UP, "down": pygame.K_DOWN, "shooting": pygame.K_RCTRL}
+                            2: {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up": pygame.K_UP, "down": pygame.K_DOWN, "shooting": pygame.K_l}
                         }
 
         #Shadows
