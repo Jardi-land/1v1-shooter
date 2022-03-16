@@ -5,3 +5,7 @@ __pycache__/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+
+#Special
+settings.py
