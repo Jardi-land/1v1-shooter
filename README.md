@@ -41,7 +41,7 @@ Gunner 1v1 est un jeu qui se joue à deux sur le meme ordinateur, c’est un jeu
 - Les touches pour le personnage de droite sont: ⌨️
 
 	- Les flèches: pour les déplacements
-	- Ctrl gauche: pour tirer
+	- L: pour tirer
 - En haut à gauche vous verrez la vie et le cooldown de l’arme (entièrement réglable):💻
 
 ![🔫 Gunner 1v1 🔫--2](https://i.ibb.co/vLPmmww/Capture-d-e-cran-2022-02-23-a-11-17-50.png)
