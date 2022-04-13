@@ -2,7 +2,7 @@
 Creator: @Lorenzo_De_ZEN
 """
 
-import sys, pygame
+import sys, pygame, os
 from level import *
 from player import *
 from settings import *
@@ -11,6 +11,8 @@ from menu import main_menu, choose_char_menu, end_screen
 
 pygame.init()
 def Game(player_1, player_2):
+
+    os.chdir(os.path.dirname(__file__))
 
     screen = pygame.display.set_mode((screen_res[0], screen_res[1]))
     pygame.display.set_caption(window_name)
